@@ -1,7 +1,8 @@
 import Foundation
 import SystemConfiguration
 
-class Reachability {
+/// Класс для отслеживания интернета
+final class Reachability {
     var hostname: String?
     var isRunning = false
     var isReachableOnWWAN: Bool
@@ -10,7 +11,7 @@ class Reachability {
     let reachabilitySerialQueue = DispatchQueue(label: "ReachabilityQueue")
     init(hostname: String) throws {
         guard let reachability = SCNetworkReachabilityCreateWithName(nil, hostname) else {
-            throw Network.Error.failedToCreateWith(hostname)
+            throw Network.NetworkError.failedToCreateWith(hostname)
         }
         self.reachability = reachability
         self.hostname = hostname
@@ -26,7 +27,7 @@ class Reachability {
                 SCNetworkReachabilityCreateWithAddress(nil, $0)
             }
         }) else {
-            throw Network.Error.failedToInitializeWith(zeroAddress)
+            throw Network.NetworkError.failedToInitializeWith(zeroAddress)
         }
         self.reachability = reachability
         isReachableOnWWAN = true
@@ -54,10 +55,10 @@ extension Reachability {
         var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
         context.info = Unmanaged<Reachability>.passUnretained(self).toOpaque()
         guard SCNetworkReachabilitySetCallback(reachability, callout, &context) else { stop()
-            throw Network.Error.failedToSetCallout
+            throw Network.NetworkError.failedToSetCallout
         }
         guard SCNetworkReachabilitySetDispatchQueue(reachability, reachabilitySerialQueue) else { stop()
-            throw Network.Error.failedToSetDispatchQueue
+            throw Network.NetworkError.failedToSetDispatchQueue
         }
         reachabilitySerialQueue.async { self.flagsChanged() }
         isRunning = true
@@ -81,7 +82,7 @@ extension Reachability {
         return isReachable && isRunningOnDevice && !isWWAN
     }
 
-    /// Flags that indicate the reachability of a network node name or address, including whether a connection is required, and whether some user intervention might be required when establishing a connection.
+    /// Флаги, указывающие доступность имени или адреса сетевого узла, в том числе, требуется ли подключение и может ли потребоваться какое-либо вмешательство пользователя при установлении соединения.
     var flags: SCNetworkReachabilityFlags? {
         guard let reachability = reachability else { return nil }
         var flags = SCNetworkReachabilityFlags()
@@ -90,42 +91,42 @@ extension Reachability {
             } ? flags : nil
     }
 
-    /// compares the current flags with the previous flags and if changed posts a flagsChanged notification
+    /// Cравнивает текущие флаги с предыдущими флагами и, если они изменены, публикует уведомление об изменении флага
     func flagsChanged() {
         guard let flags = flags, flags != reachabilityFlags else { return }
         reachabilityFlags = flags
         NotificationCenter.default.post(name: .flagsChanged, object: self)
     }
 
-    /// The specified node name or address can be reached via a transient connection, such as PPP.
+    /// Указанное имя или адрес узла могут быть достигнуты через временное соединение, такое как PPP.
     var transientConnection: Bool { return flags?.contains(.transientConnection) == true }
 
-    /// The specified node name or address can be reached using the current network configuration.
+    /// Указанное имя или адрес узла можно получить, используя текущую конфигурацию сети.
     var isReachable: Bool { return flags?.contains(.reachable) == true }
 
-    /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set, the kSCNetworkReachabilityFlagsConnectionOnTraffic flag, kSCNetworkReachabilityFlagsConnectionOnDemand flag, or kSCNetworkReachabilityFlagsIsWWAN flag is also typically set to indicate the type of connection required. If the user must manually make the connection, the kSCNetworkReachabilityFlagsInterventionRequired flag is also set.
+    /// Указанное имя или адрес узла можно получить, используя текущую конфигурацию сети, но сначала необходимо установить соединение. Если этот флаг установлен, флаг kSCNetworkReachabilityFlagsConnectionOnTraffic, флаг kSCNetworkReachabilityFlagsConnectionOnDemand или флаг kSCNetworkReachabilityFlagsIsWWAN также обычно устанавливаются для указания типа требуемого подключения. Если пользователь должен вручную установить соединение, также устанавливается флаг kSCNetworkReachabilityFlagsInterventionRequired.
     var connectionRequired: Bool { return flags?.contains(.connectionRequired) == true }
 
-    /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection.
+    /// Указанное имя или адрес узла можно получить, используя текущую конфигурацию сети, но сначала необходимо установить соединение. Любой трафик, направленный на указанное имя или адрес, инициирует соединение.
     var connectionOnTraffic: Bool { return flags?.contains(.connectionOnTraffic) == true }
 
-    /// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
+    /// Указанное имя или адрес узла можно получить, используя текущую конфигурацию сети, но сначала необходимо установить соединение.
     var interventionRequired: Bool { return flags?.contains(.interventionRequired) == true }
 
-    /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. The connection will be established "On Demand" by the CFSocketStream programming interface (see CFStream Socket Additions for information on this). Other functions will not establish the connection.
+    /// Указанное имя или адрес узла можно получить, используя текущую конфигурацию сети, но сначала необходимо установить соединение. Соединение будет установлено "По требованию" с помощью программного интерфейса CFSocketStream (информацию об этом см. в разделе Дополнения к сокетам CFStream). Другие функции не позволят установить соединение.
     var connectionOnDemand: Bool { return flags?.contains(.connectionOnDemand) == true }
 
-    /// The specified node name or address is one that is associated with a network interface on the current system.
+    /// Указанное имя или адрес узла - это тот, который связан с сетевым интерфейсом в текущей системе.
     var isLocalAddress: Bool { return flags?.contains(.isLocalAddress) == true }
 
-    /// Network traffic to the specified node name or address will not go through a gateway, but is routed directly to one of the interfaces in the system.
+    /// Сетевой трафик на указанное имя или адрес узла не будет проходить через шлюз, а будет перенаправляться непосредственно на один из интерфейсов в системе.
     var isDirect: Bool { return flags?.contains(.isDirect) == true }
 
-    /// The specified node name or address can be reached via a cellular connection, such as EDGE or GPRS.
+    /// С указанным именем или адресом узла можно связаться через сотовую связь, такую как EDGE или GPRS.
     var isWWAN: Bool { return flags?.contains(.isWWAN) == true }
 
-    /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set
-    /// The specified node name or address can be reached via a transient connection, such as PPP.
+    /// Указанное имя или адрес узла можно получить, используя текущую конфигурацию сети, но сначала необходимо установить соединение. Если этот флаг установлен
+    /// Указанное имя или адрес узла могут быть достигнуты через временное соединение, такое как PPP.
     var isConnectionRequiredAndTransientConnection: Bool {
         return (flags?.intersection([.connectionRequired, .transientConnection]) == [.connectionRequired, .transientConnection]) == true
     }
@@ -145,15 +146,4 @@ extension Notification.Name {
     static let flagsChanged = Notification.Name("FlagsChanged")
 }
 
-struct Network {
-    static var reachability: Reachability!
-    enum Status: String {
-        case unreachable, wifi, wwan
-    }
-    enum Error: Swift.Error {
-        case failedToSetCallout
-        case failedToSetDispatchQueue
-        case failedToCreateWith(String)
-        case failedToInitializeWith(sockaddr_in)
-    }
-}
+

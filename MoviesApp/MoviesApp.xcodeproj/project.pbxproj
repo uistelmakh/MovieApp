@@ -14,9 +14,10 @@
 		42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D30273A8F6D00926968 /* MoviesInteractor.swift */; };
 		42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D37273A8FE500926968 /* MoviesConfigurator.swift */; };
 		4262408F27424DB30034CDC5 /* BaseConfiguratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */; };
+		4272E4BA277CACB70094EF6A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272E4B9277CACB70094EF6A /* Movie.swift */; };
+		4272E4BC277CACFD0094EF6A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272E4BB277CACFD0094EF6A /* Network.swift */; };
 		4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */; };
 		4284004127400AF3007BEF11 /* GlobalConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284004027400AF3007BEF11 /* GlobalConsts.swift */; };
-		4284004427400E2A007BEF11 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284004327400E2A007BEF11 /* APIRequest.swift */; };
 		42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E411DF273A742800429FE2 /* AppDelegate.swift */; };
 		42E411E9273A742C00429FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E411E8273A742C00429FE2 /* Assets.xcassets */; };
 		42E411EC273A742C00429FE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42E411EA273A742C00429FE2 /* LaunchScreen.storyboard */; };
@@ -32,9 +33,10 @@
 		42116D30273A8F6D00926968 /* MoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInteractor.swift; sourceTree = "<group>"; };
 		42116D37273A8FE500926968 /* MoviesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesConfigurator.swift; sourceTree = "<group>"; };
 		4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConfiguratorProtocol.swift; sourceTree = "<group>"; };
+		4272E4B9277CACB70094EF6A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		4272E4BB277CACFD0094EF6A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingAssistant.swift; sourceTree = "<group>"; };
 		4284004027400AF3007BEF11 /* GlobalConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConsts.swift; sourceTree = "<group>"; };
-		4284004327400E2A007BEF11 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		42E411DC273A742800429FE2 /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E411DF273A742800429FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42E411E8273A742C00429FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		42116D22273A785200926968 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4272E4B9277CACB70094EF6A /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,21 +100,45 @@
 			isa = PBXGroup;
 			children = (
 				42840048274013CE007BEF11 /* Helpers */,
-				4284004227400DD9007BEF11 /* DefaultAPI */,
+				4284004227400DD9007BEF11 /* Services */,
 				4284004027400AF3007BEF11 /* GlobalConsts.swift */,
-				4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */,
-				4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */,
-				42FBF82C2759FC16001BF26B /* Reachability.swift */,
+				4272E4B7277CAB8C0094EF6A /* Configuration */,
+				4272E4B8277CAB9E0094EF6A /* Reachability */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		4284004227400DD9007BEF11 /* DefaultAPI */ = {
+		4272E4B7277CAB8C0094EF6A /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				4284004327400E2A007BEF11 /* APIRequest.swift */,
+				4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */,
+				4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */,
 			);
-			path = DefaultAPI;
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		4272E4B8277CAB9E0094EF6A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				42FBF82C2759FC16001BF26B /* Reachability.swift */,
+				4272E4BB277CACFD0094EF6A /* Network.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		4272E4BD277CAE210094EF6A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4284004227400DD9007BEF11 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4272E4BD277CAE210094EF6A /* Network */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		4284004527400F4E007BEF11 /* Search */ = {
@@ -261,10 +288,11 @@
 				42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */,
 				42116D31273A8F6D00926968 /* MoviesPresenter.swift in Sources */,
 				4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */,
+				4272E4BA277CACB70094EF6A /* Movie.swift in Sources */,
 				42FBF82D2759FC16001BF26B /* Reachability.swift in Sources */,
 				4262408F27424DB30034CDC5 /* BaseConfiguratorProtocol.swift in Sources */,
 				42116D35273A8F6D00926968 /* MoviesViewController.swift in Sources */,
-				4284004427400E2A007BEF11 /* APIRequest.swift in Sources */,
+				4272E4BC277CACFD0094EF6A /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

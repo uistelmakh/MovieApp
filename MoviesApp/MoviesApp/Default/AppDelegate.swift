@@ -15,8 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
+        // Проверка подключения к хосту
         checkInternetConnection()
+        
         // Загрузка стартового экрана
         createStartVC()
         return true
@@ -53,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try Network.reachability = Reachability(hostname: "www.google.com")
         }
         catch {
-            switch error as? Network.Error {
+            switch error as? Network.NetworkError {
             case let .failedToCreateWith(hostname)?:
                 print("Network error:\nFailed to create reachability object With host named:", hostname)
             case let .failedToInitializeWith(address)?:
