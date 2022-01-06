@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Структурка модельки фильмов
 struct Movie {
     
 }
