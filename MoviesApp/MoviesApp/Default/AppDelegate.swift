@@ -25,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Создание стартового экрана
     private func createStartVC() {
-        
-        
         let navigationController = UINavigationController()
         routingAssistant.setRootNavigationController(navigationController)
         
@@ -44,7 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
             NotificationCenter.default.addObserver(self, selector: #selector(self.statusManager), name: .flagsChanged, object: nil)
     }
-    
+}
+
+// MARK: - Networking check
+extension AppDelegate {
     @objc func statusManager(_ notification: Notification) {
         createStartVC()
     }
@@ -69,4 +70,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-
