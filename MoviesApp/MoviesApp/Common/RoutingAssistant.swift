@@ -39,7 +39,6 @@ final class RoutingAssistant {
     private var rootNavigationController: UINavigationController!
     private var tabBarController: UITabBarController?
     
-    //private let reachability = try! Reachability()
     private init(){}
 }
 
@@ -50,20 +49,7 @@ extension RoutingAssistant: RoutingAssistantProtocol {
     }
     
     func constructStartViewController(completion: @escaping (UIViewController?) -> ()) {
-        
-        switch Network.reachability.status {
-        case .unreachable:
-            completion(TestNetworkViewController())
-            
-        case .wifi, .wwan:
             completion(self.constructEnterContainer())
-        }
-        print("Reachability Summary")
-        print("Status:", Network.reachability.status)
-        print("HostName:", Network.reachability.hostname ?? "nil")
-        print("Reachable:", Network.reachability.isReachable)
-        print("Wifi:", Network.reachability.isReachableViaWiFi)
-        
     }
 }
 

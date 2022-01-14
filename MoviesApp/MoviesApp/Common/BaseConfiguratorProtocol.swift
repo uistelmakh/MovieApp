@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-/// Протокол базовой конфигурации сцены
+/// Протокол базовой конфигурации модуля
 protocol BaseConfiguratorProtocol {
-    /// Метод конфигурации сцены
+    /// Метод конфигурации модуля
     func configure(viewController: UIViewController, navigationController: UINavigationController?)
 }
