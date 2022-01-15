@@ -23,6 +23,7 @@
 		423C600327918BBF00DC4C95 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFD27918BBF00DC4C95 /* SearchViewController.swift */; };
 		423C600427918BBF00DC4C95 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */; };
 		423C60072791B6E700DC4C95 /* TrendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C60062791B6E700DC4C95 /* TrendsCell.swift */; };
+		423C60092792FDB100DC4C95 /* TrendsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C60082792FDB100DC4C95 /* TrendsItemCell.swift */; };
 		4262408F27424DB30034CDC5 /* BaseConfiguratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */; };
 		4272E4BA277CACB70094EF6A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272E4B9277CACB70094EF6A /* Movie.swift */; };
 		4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */; };
@@ -49,6 +50,7 @@
 		423C5FFD27918BBF00DC4C95 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		423C60062791B6E700DC4C95 /* TrendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsCell.swift; sourceTree = "<group>"; };
+		423C60082792FDB100DC4C95 /* TrendsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsItemCell.swift; sourceTree = "<group>"; };
 		4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConfiguratorProtocol.swift; sourceTree = "<group>"; };
 		4272E4B9277CACB70094EF6A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingAssistant.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				423C60062791B6E700DC4C95 /* TrendsCell.swift */,
+				423C60082792FDB100DC4C95 /* TrendsItemCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */,
 				42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */,
 				423C60072791B6E700DC4C95 /* TrendsCell.swift in Sources */,
+				423C60092792FDB100DC4C95 /* TrendsItemCell.swift in Sources */,
 				42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */,
 				423C5FF527918BA500DC4C95 /* FavoritesRouter.swift in Sources */,
 				42116D31273A8F6D00926968 /* MoviesPresenter.swift in Sources */,

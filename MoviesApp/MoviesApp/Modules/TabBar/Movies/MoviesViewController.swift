@@ -12,6 +12,7 @@
 
 import UIKit
 
+/// Протокол отображения MoviesViewController-а
 protocol MoviesDisplayLogic: AnyObject {
     
 }
@@ -82,8 +83,6 @@ extension MoviesViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 // MARK: - UITableViewDelegate
