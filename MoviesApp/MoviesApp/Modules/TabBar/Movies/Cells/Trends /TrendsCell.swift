@@ -22,7 +22,10 @@ final class TrendsCell: UITableViewCell {
     }()
     
     private let collectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(TrendsItemCell.self, forCellWithReuseIdentifier: String(describing: TrendsItemCell.self))
+        
         return collectionView
     }()
     
@@ -62,11 +65,11 @@ private extension TrendsCell {
 // MARK: - UICollectionViewDataSource
 extension TrendsCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "h", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TrendsItemCell.self), for: indexPath)
         
         return cell
     }
@@ -74,5 +77,10 @@ extension TrendsCell: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension TrendsCell: UICollectionViewDelegate {
+    
+}
+
+// MARK: - UICollectionViewDelegate
+extension TrendsCell: UICollectionViewDelegateFlowLayout {
     
 }

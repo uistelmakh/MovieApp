@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Отображение фильма в ячейке
 final class TrendsItemCell: UICollectionViewCell {
     
     // MARK: - Lifecycle

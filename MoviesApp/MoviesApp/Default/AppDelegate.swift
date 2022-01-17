@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         routingAssistant.constructStartViewController() { startViewController in
             if let startViewController = startViewController {
                 navigationController.viewControllers = [startViewController]
+                navigationController.isNavigationBarHidden = true
                 self.window?.rootViewController = navigationController
                 self.window?.makeKeyAndVisible()
             } else {

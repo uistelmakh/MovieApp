@@ -24,6 +24,7 @@
 		423C600427918BBF00DC4C95 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */; };
 		423C60072791B6E700DC4C95 /* TrendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C60062791B6E700DC4C95 /* TrendsCell.swift */; };
 		423C60092792FDB100DC4C95 /* TrendsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C60082792FDB100DC4C95 /* TrendsItemCell.swift */; };
+		423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C600C2794651600DC4C95 /* TabBarItem.swift */; };
 		4262408F27424DB30034CDC5 /* BaseConfiguratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */; };
 		4272E4BA277CACB70094EF6A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272E4B9277CACB70094EF6A /* Movie.swift */; };
 		4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */; };
@@ -51,6 +52,7 @@
 		423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		423C60062791B6E700DC4C95 /* TrendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsCell.swift; sourceTree = "<group>"; };
 		423C60082792FDB100DC4C95 /* TrendsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsItemCell.swift; sourceTree = "<group>"; };
+		423C600C2794651600DC4C95 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConfiguratorProtocol.swift; sourceTree = "<group>"; };
 		4272E4B9277CACB70094EF6A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingAssistant.swift; sourceTree = "<group>"; };
@@ -148,10 +150,26 @@
 		423C60052791B6C600DC4C95 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				423C600A2793194100DC4C95 /* Trends  */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		423C600A2793194100DC4C95 /* Trends  */ = {
+			isa = PBXGroup;
+			children = (
 				423C60062791B6E700DC4C95 /* TrendsCell.swift */,
 				423C60082792FDB100DC4C95 /* TrendsItemCell.swift */,
 			);
-			path = Cells;
+			path = "Trends ";
+			sourceTree = "<group>";
+		};
+		423C600B279464F600DC4C95 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				423C600C2794651600DC4C95 /* TabBarItem.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		42840047274012E6007BEF11 /* TabBar */ = {
@@ -192,6 +210,7 @@
 		42E411DE273A742800429FE2 /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
+				423C600B279464F600DC4C95 /* Views */,
 				42116D24273A786400926968 /* Default */,
 				42116D39273AAD6D00926968 /* Common */,
 				42116D22273A785200926968 /* Models */,
@@ -276,6 +295,7 @@
 				423C5FF827918BA500DC4C95 /* FavoritesInteractor.swift in Sources */,
 				42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */,
 				4284004127400AF3007BEF11 /* GlobalConsts.swift in Sources */,
+				423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */,
 				423C600027918BBF00DC4C95 /* SearchWorker.swift in Sources */,
 				423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */,
 				42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */,
@@ -436,6 +456,7 @@
 				DEVELOPMENT_TEAM = 54P9KQ4K8G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Киносмотр 🍿";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -465,6 +486,7 @@
 				DEVELOPMENT_TEAM = 54P9KQ4K8G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Киносмотр 🍿";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

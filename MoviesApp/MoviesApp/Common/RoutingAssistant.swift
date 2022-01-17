@@ -49,7 +49,10 @@ extension RoutingAssistant: RoutingAssistantProtocol {
     }
     
     func constructStartViewController(completion: @escaping (UIViewController?) -> ()) {
-            completion(self.constructEnterContainer())
+        if self.tabBarController == nil {
+            self.tabBarController = self.constructTabBarContainer() as? UITabBarController
+        }
+        completion(self.tabBarController)
     }
 }
 
@@ -60,7 +63,25 @@ extension RoutingAssistant: ModuleMakerProtocol {
     }
     
     func constructTabBarContainer() -> UIViewController? {
-        return UIViewController()
+        
+        var viewControllers = [UIViewController]()
+        
+        // ТАБ фильмы
+        let moviesNavigationController = UINavigationController()
+        let moviesViewController = construct(view: MoviesViewController(), with: MoviesConfigurator(), navigationViewController: moviesNavigationController)
+        
+        moviesNavigationController.viewControllers = [moviesViewController]
+        moviesViewController.tabBarItem = TabBarItem(image: UIImage(named: "main") ?? UIImage())
+        viewControllers.append(moviesViewController)
+        
+        // controller
+        let controller = UITabBarController()
+        controller.tabBar.backgroundColor = .white
+        controller.tabBar.tintColor = UIColor.black
+        controller.viewControllers = viewControllers
+        controller.selectedIndex = 0
+        
+        return controller
     }
 }
 

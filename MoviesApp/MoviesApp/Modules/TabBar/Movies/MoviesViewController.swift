@@ -51,7 +51,7 @@ final class MoviesViewController: UIViewController {
 private extension MoviesViewController {
     func setup() {
         view.backgroundColor = .white
-        
+        title = "Киносмотр 🍿"
         view.addSubview(tableView)
         
         tableView.delegate = self
