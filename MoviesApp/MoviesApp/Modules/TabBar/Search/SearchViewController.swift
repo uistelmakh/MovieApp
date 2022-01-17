@@ -12,26 +12,45 @@
 
 import UIKit
 
-protocol SearchDisplayLogic: class{
+/// Протокол отображения SearchViewController-а
+protocol SearchDisplayLogic: AnyObject {
   
 }
 
-class SearchViewController: UIViewController, SearchDisplayLogic
-{
-  var interactor: SearchBusinessLogic?
-  var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
-
+/// Экран поиска фильмов
+final class SearchViewController: UIViewController {
   
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
+    /// Ссылка на слой презентации
+    var presenter: SearchViewControllerOutput?
     
-  }
-  
-  // MARK: Do something
-  
-  
+    // MARK: View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+}
+
+// MARK: - Setup
+private extension SearchViewController {
+    func setup() {
+        view.backgroundColor = .white
+        title = "Поиск 🔎"
+    }
+}
+
+// MARK: - Setup constraints
+private extension SearchViewController {
+    func setupConstraints() {
+        
+    }
+}
+
+extension SearchViewController: SearchDisplayLogic {
+    
 }

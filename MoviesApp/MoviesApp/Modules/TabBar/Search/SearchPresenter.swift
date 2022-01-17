@@ -12,13 +12,29 @@
 
 import UIKit
 
-protocol SearchPresentationLogic
-{
+/// Логика презентации
+protocol SearchPresentationLogic {
   
 }
 
-final class SearchPresenter: SearchPresentationLogic {
+/// Протокол для работы SearchPresenter из SearchViewController
+protocol SearchViewControllerOutput {
+    
+}
+
+
+final class SearchPresenter {
   weak var viewController: SearchDisplayLogic?
-  
-  
+    var interactor: SearchBusinessLogic?
+    var router: SearchRoutingLogic?
+}
+
+// MARK: - SearchPresentationLogic
+extension SearchPresenter: SearchPresentationLogic {
+    
+}
+
+// MARK: - SearchViewControllerOutput
+extension SearchPresenter: SearchViewControllerOutput {
+    
 }

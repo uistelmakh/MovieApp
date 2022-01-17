@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarItem: UITabBarItem {
+final class TabBarItem: UITabBarItem {
 
     override var title: String? {
         get { return nil }

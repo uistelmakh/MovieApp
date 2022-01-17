@@ -13,12 +13,13 @@
 		42116D35273A8F6D00926968 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D2F273A8F6D00926968 /* MoviesViewController.swift */; };
 		42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D30273A8F6D00926968 /* MoviesInteractor.swift */; };
 		42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D37273A8FE500926968 /* MoviesConfigurator.swift */; };
+		42339F802795581A0043B419 /* SearchConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42339F7F2795581A0043B419 /* SearchConfigurator.swift */; };
+		42339F83279562120043B419 /* UITableView+SetEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42339F82279562120043B419 /* UITableView+SetEmpty.swift */; };
 		423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FED27918BA500DC4C95 /* FavoritesPresenter.swift */; };
 		423C5FF527918BA500DC4C95 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FEF27918BA500DC4C95 /* FavoritesRouter.swift */; };
 		423C5FF727918BA500DC4C95 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FF127918BA500DC4C95 /* FavoritesViewController.swift */; };
 		423C5FF827918BA500DC4C95 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FF227918BA500DC4C95 /* FavoritesInteractor.swift */; };
 		423C5FFF27918BBF00DC4C95 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FF927918BBF00DC4C95 /* SearchPresenter.swift */; };
-		423C600027918BBF00DC4C95 /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFA27918BBF00DC4C95 /* SearchWorker.swift */; };
 		423C600127918BBF00DC4C95 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFB27918BBF00DC4C95 /* SearchRouter.swift */; };
 		423C600327918BBF00DC4C95 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFD27918BBF00DC4C95 /* SearchViewController.swift */; };
 		423C600427918BBF00DC4C95 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */; };
@@ -41,12 +42,13 @@
 		42116D2F273A8F6D00926968 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		42116D30273A8F6D00926968 /* MoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInteractor.swift; sourceTree = "<group>"; };
 		42116D37273A8FE500926968 /* MoviesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesConfigurator.swift; sourceTree = "<group>"; };
+		42339F7F2795581A0043B419 /* SearchConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConfigurator.swift; sourceTree = "<group>"; };
+		42339F82279562120043B419 /* UITableView+SetEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SetEmpty.swift"; sourceTree = "<group>"; };
 		423C5FED27918BA500DC4C95 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		423C5FEF27918BA500DC4C95 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
 		423C5FF127918BA500DC4C95 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		423C5FF227918BA500DC4C95 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		423C5FF927918BBF00DC4C95 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
-		423C5FFA27918BBF00DC4C95 /* SearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
 		423C5FFB27918BBF00DC4C95 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		423C5FFD27918BBF00DC4C95 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
@@ -124,14 +126,22 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		42339F81279561C50043B419 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				42339F82279562120043B419 /* UITableView+SetEmpty.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		423C5FEB27918AFF00DC4C95 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				423C5FF927918BBF00DC4C95 /* SearchPresenter.swift */,
-				423C5FFA27918BBF00DC4C95 /* SearchWorker.swift */,
-				423C5FFB27918BBF00DC4C95 /* SearchRouter.swift */,
 				423C5FFD27918BBF00DC4C95 /* SearchViewController.swift */,
+				423C5FF927918BBF00DC4C95 /* SearchPresenter.swift */,
 				423C5FFE27918BBF00DC4C95 /* SearchInteractor.swift */,
+				423C5FFB27918BBF00DC4C95 /* SearchRouter.swift */,
+				42339F7F2795581A0043B419 /* SearchConfigurator.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -210,6 +220,7 @@
 		42E411DE273A742800429FE2 /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
+				42339F81279561C50043B419 /* Extensions */,
 				423C600B279464F600DC4C95 /* Views */,
 				42116D24273A786400926968 /* Default */,
 				42116D39273AAD6D00926968 /* Common */,
@@ -296,12 +307,12 @@
 				42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */,
 				4284004127400AF3007BEF11 /* GlobalConsts.swift in Sources */,
 				423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */,
-				423C600027918BBF00DC4C95 /* SearchWorker.swift in Sources */,
 				423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */,
 				42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */,
 				423C60072791B6E700DC4C95 /* TrendsCell.swift in Sources */,
 				423C60092792FDB100DC4C95 /* TrendsItemCell.swift in Sources */,
 				42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */,
+				42339F802795581A0043B419 /* SearchConfigurator.swift in Sources */,
 				423C5FF527918BA500DC4C95 /* FavoritesRouter.swift in Sources */,
 				42116D31273A8F6D00926968 /* MoviesPresenter.swift in Sources */,
 				4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */,
@@ -310,6 +321,7 @@
 				42116D35273A8F6D00926968 /* MoviesViewController.swift in Sources */,
 				423C600327918BBF00DC4C95 /* SearchViewController.swift in Sources */,
 				423C5FFF27918BBF00DC4C95 /* SearchPresenter.swift in Sources */,
+				42339F83279562120043B419 /* UITableView+SetEmpty.swift in Sources */,
 				423C5FF727918BA500DC4C95 /* FavoritesViewController.swift in Sources */,
 				423C600427918BBF00DC4C95 /* SearchInteractor.swift in Sources */,
 				423C600127918BBF00DC4C95 /* SearchRouter.swift in Sources */,

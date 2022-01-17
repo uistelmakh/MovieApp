@@ -72,9 +72,17 @@ extension RoutingAssistant: ModuleMakerProtocol {
         
         moviesNavigationController.viewControllers = [moviesViewController]
         moviesViewController.tabBarItem = TabBarItem(image: UIImage(named: "main") ?? UIImage())
-        viewControllers.append(moviesViewController)
+        viewControllers.append(moviesNavigationController)
         
-        // controller
+        // ТАБ поиск фильмов
+        let searchNavigationController = UINavigationController()
+        let searchViewController = construct(view: SearchViewController(), with: SearchConfigurator(), navigationViewController: searchNavigationController)
+        
+        searchNavigationController.viewControllers = [searchViewController]
+        searchViewController.tabBarItem = TabBarItem(image: UIImage(named: "search") ?? UIImage())
+        viewControllers.append(searchNavigationController)
+        
+        // tabbar controller
         let controller = UITabBarController()
         controller.tabBar.backgroundColor = .white
         controller.tabBar.tintColor = UIColor.black

@@ -12,21 +12,16 @@
 
 import UIKit
 
-protocol SearchBusinessLogic
-{
+protocol SearchBusinessLogic {
   
 }
 
-protocol SearchDataStore
-{
-  //var name: String { get set }
+
+final class SearchInteractor {
+    var presenter: SearchPresentationLogic?
 }
 
-class SearchInteractor: SearchBusinessLogic, SearchDataStore
-{
-  var presenter: SearchPresentationLogic?
-  var worker: SearchWorker?
-  //var name: String = ""
-  
-  
+// MARK: - SearchBusinessLogic
+extension SearchInteractor: SearchBusinessLogic {
+    
 }
