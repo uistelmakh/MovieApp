@@ -52,6 +52,7 @@ private extension MoviesViewController {
     func setup() {
         view.backgroundColor = .white
         title = "Киносмотр 🍿"
+        navigationController?.navigationBar.prefersLargeTitles = true
         view.addSubview(tableView)
         
         tableView.delegate = self

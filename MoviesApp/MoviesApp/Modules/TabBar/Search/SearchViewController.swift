@@ -19,6 +19,22 @@ protocol SearchDisplayLogic: AnyObject {
 
 /// Экран поиска фильмов
 final class SearchViewController: UIViewController {
+    
+    // MARK: - UI
+    
+    /// Контроллер для поиска
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    /// таблица для отображения коллекций
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
+        return tableView
+    }()
+    
+    /// фильмы
+    var films = [String]()
   
     /// Ссылка на слой презентации
     var presenter: SearchViewControllerOutput?
@@ -41,16 +57,66 @@ private extension SearchViewController {
     func setup() {
         view.backgroundColor = .white
         title = "Поиск 🔎"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // SearchController
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        // tableView
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }
 
 // MARK: - Setup constraints
 private extension SearchViewController {
     func setupConstraints() {
-        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 }
 
+// MARK: - UITableViewDataSource
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if films.count == 0 {
+            tableView.setEmptyView(title: "У вас нет задач 🤷‍♂️", message: "Введите название фильма в поиск")
+        }
+        else {
+            tableView.restore()
+        }
+        
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchCell.self), for: indexPath) as? SearchCell else { return UITableViewCell() }
+        
+        
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension SearchViewController: UITableViewDelegate {
+    
+}
+
+// MARK: - UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
+    
+}
+
+// MARK: - SearchDisplayLogic
 extension SearchViewController: SearchDisplayLogic {
     
 }
