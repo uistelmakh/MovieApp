@@ -20,6 +20,9 @@ protocol MoviesDisplayLogic: AnyObject {
 /// Главный экран, отображение фильмов
 final class MoviesViewController: UIViewController {
     
+    // MARK: - Константные текстовки
+    private let titleVC = "Киносмотр 🍿"
+    
     // MARK: - UI
     
     /// таблица для отображения коллекций
@@ -29,6 +32,8 @@ final class MoviesViewController: UIViewController {
         tableView.register(TrendsCell.self, forCellReuseIdentifier: String(describing: TrendsCell.self))
         return tableView
     }()
+    
+    // MARK: - Params
     
     /// Ссылка на слой презентации
     var presenter: MoviesViewControllerOutput?
@@ -51,7 +56,7 @@ final class MoviesViewController: UIViewController {
 private extension MoviesViewController {
     func setup() {
         view.backgroundColor = .white
-        title = "Киносмотр 🍿"
+        title = titleVC
         navigationController?.navigationBar.prefersLargeTitles = true
         view.addSubview(tableView)
         

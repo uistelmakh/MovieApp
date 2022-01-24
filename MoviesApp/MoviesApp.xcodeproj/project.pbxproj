@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421033FE279E8C4D00F9268D /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421033FD279E8C4D00F9268D /* APIRequest.swift */; };
 		42116D21273A775E00926968 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 42116D20273A775E00926968 /* .gitignore */; };
 		42116D31273A8F6D00926968 /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D2B273A8F6D00926968 /* MoviesPresenter.swift */; };
 		42116D33273A8F6D00926968 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42116D2D273A8F6D00926968 /* MoviesRouter.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		421033FD279E8C4D00F9268D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		42116D20273A775E00926968 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		42116D2B273A8F6D00926968 /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
 		42116D2D273A8F6D00926968 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
@@ -79,6 +81,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		421033FB279E8C3000F9268D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				421033FC279E8C3800F9268D /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		421033FC279E8C3800F9268D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				421033FD279E8C4D00F9268D /* APIRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		42116D22273A785200926968 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +139,7 @@
 		42116D39273AAD6D00926968 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				421033FB279E8C3000F9268D /* Services */,
 				4284004027400AF3007BEF11 /* GlobalConsts.swift */,
 				4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */,
 				4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */,
@@ -316,6 +335,7 @@
 				42116D33273A8F6D00926968 /* MoviesRouter.swift in Sources */,
 				42339F862796E0D60043B419 /* SearchCell.swift in Sources */,
 				423C5FF827918BA500DC4C95 /* FavoritesInteractor.swift in Sources */,
+				421033FE279E8C4D00F9268D /* APIRequest.swift in Sources */,
 				42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */,
 				4284004127400AF3007BEF11 /* GlobalConsts.swift in Sources */,
 				423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */,

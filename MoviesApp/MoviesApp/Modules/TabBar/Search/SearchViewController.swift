@@ -20,6 +20,9 @@ protocol SearchDisplayLogic: AnyObject {
 /// Экран поиска фильмов
 final class SearchViewController: UIViewController {
     
+    // MARK: - Константные текстовки
+    private let titleVC = "Поиск 🔎"
+    
     // MARK: - UI
     
     /// Контроллер для поиска
@@ -32,6 +35,8 @@ final class SearchViewController: UIViewController {
         tableView.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
         return tableView
     }()
+    
+    // MARK: - Params
     
     /// фильмы
     var films = [String]()
@@ -56,7 +61,7 @@ final class SearchViewController: UIViewController {
 private extension SearchViewController {
     func setup() {
         view.backgroundColor = .white
-        title = "Поиск 🔎"
+        title = titleVC
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // SearchController
