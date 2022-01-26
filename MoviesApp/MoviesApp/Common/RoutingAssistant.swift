@@ -39,7 +39,6 @@ final class RoutingAssistant {
     private var rootNavigationController: UINavigationController!
     private var tabBarController: UITabBarController?
     
-    //private let reachability = try! Reachability()
     private init(){}
 }
 
@@ -50,20 +49,10 @@ extension RoutingAssistant: RoutingAssistantProtocol {
     }
     
     func constructStartViewController(completion: @escaping (UIViewController?) -> ()) {
-        
-        switch Network.reachability.status {
-        case .unreachable:
-            completion(TestNetworkViewController())
-            
-        case .wifi, .wwan:
-            completion(self.constructEnterContainer())
+        if self.tabBarController == nil {
+            self.tabBarController = self.constructTabBarContainer() as? UITabBarController
         }
-        print("Reachability Summary")
-        print("Status:", Network.reachability.status)
-        print("HostName:", Network.reachability.hostname ?? "nil")
-        print("Reachable:", Network.reachability.isReachable)
-        print("Wifi:", Network.reachability.isReachableViaWiFi)
-        
+        completion(self.tabBarController)
     }
 }
 
@@ -74,7 +63,33 @@ extension RoutingAssistant: ModuleMakerProtocol {
     }
     
     func constructTabBarContainer() -> UIViewController? {
-        return UIViewController()
+        
+        var viewControllers = [UIViewController]()
+        
+        // ТАБ фильмы
+        let moviesNavigationController = UINavigationController()
+        let moviesViewController = construct(view: MoviesViewController(), with: MoviesConfigurator(), navigationViewController: moviesNavigationController)
+        
+        moviesNavigationController.viewControllers = [moviesViewController]
+        moviesViewController.tabBarItem = TabBarItem(image: UIImage(named: "main") ?? UIImage())
+        viewControllers.append(moviesNavigationController)
+        
+        // ТАБ поиск фильмов
+        let searchNavigationController = UINavigationController()
+        let searchViewController = construct(view: SearchViewController(), with: SearchConfigurator(), navigationViewController: searchNavigationController)
+        
+        searchNavigationController.viewControllers = [searchViewController]
+        searchViewController.tabBarItem = TabBarItem(image: UIImage(named: "search") ?? UIImage())
+        viewControllers.append(searchNavigationController)
+        
+        // tabbar controller
+        let controller = UITabBarController()
+        controller.tabBar.backgroundColor = .white
+        controller.tabBar.tintColor = UIColor.black
+        controller.viewControllers = viewControllers
+        controller.selectedIndex = 0
+        
+        return controller
     }
 }
 

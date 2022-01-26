@@ -12,10 +12,12 @@
 
 import UIKit
 
+/// Логика презентации
 protocol MoviesPresentationLogic {
 
 }
 
+/// Протокол для работы MoviesPresenter из MoviesViewController
 protocol MoviesViewControllerOutput {
     
 }

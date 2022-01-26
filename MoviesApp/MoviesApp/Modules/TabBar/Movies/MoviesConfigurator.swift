@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Конфигуратор VIPER-модуля главной страницы с фильмами
 final class MoviesConfigurator: BaseConfiguratorProtocol {
     func configure(viewController: UIViewController, navigationController: UINavigationController?) {
         let viewController = viewController as? MoviesViewController
