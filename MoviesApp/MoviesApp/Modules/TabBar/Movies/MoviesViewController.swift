@@ -38,6 +38,8 @@ final class MoviesViewController: UIViewController {
     /// Ссылка на слой презентации
     var presenter: MoviesViewControllerOutput?
     
+    private var service: NetworkServiceProtocol = APIRequest.shared
+    
     
     // MARK: View lifecycle
     override func viewDidLoad() {
@@ -46,8 +48,21 @@ final class MoviesViewController: UIViewController {
         setupConstrains()
     }
     
+    var trends = [Trend]()
+    var trendsTotalPages = 0
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        service.getTrending(page: 1) { trendsResponse in
+            switch trendsResponse {
+            case .success(let data):
+                self.trends = data.results
+                
+                print(self.trends)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }
