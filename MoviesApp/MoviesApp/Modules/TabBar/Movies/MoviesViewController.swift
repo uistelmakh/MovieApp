@@ -29,6 +29,7 @@ final class MoviesViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
         tableView.register(TrendsCell.self, forCellReuseIdentifier: String(describing: TrendsCell.self))
         return tableView
     }()
@@ -53,16 +54,16 @@ final class MoviesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        service.getTrending(page: 1) { trendsResponse in
-            switch trendsResponse {
-            case .success(let data):
-                self.trends = data.results
-                
-                print(self.trends)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+//        service.getTrending(page: 1) { trendsResponse in
+//            switch trendsResponse {
+//            case .success(let data):
+//                self.trends = data.results
+//                
+//                print(self.trends)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
     
 }
