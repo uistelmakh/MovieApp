@@ -54,6 +54,12 @@ final class TrendsItemCell: UICollectionViewCell {
         setupConstraints()
     }
     
+    func configure(with trend: Trend) {
+        titleLabel.text = trend.name ?? trend.title
+        voteAverageLabel.text = String(trend.voteAverage)
+        mediaTypeLabel.text = trend.mediaType.ruValue
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -67,9 +73,7 @@ private extension TrendsItemCell {
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(voteAverageLabel)
-        
-        titleLabel.text = "Название фильма"
-        voteAverageLabel.text = "8.0"
+        contentView.addSubview(mediaTypeLabel)
     }
 }
 
@@ -78,10 +82,9 @@ private extension TrendsItemCell {
     func setupConstraints() {
         
         // titleLabel
-        
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
         
@@ -90,6 +93,14 @@ private extension TrendsItemCell {
             voteAverageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             voteAverageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             voteAverageLabel.widthAnchor.constraint(equalToConstant: 32)
+        ])
+        
+        // mediaTypeLabel
+        NSLayoutConstraint.activate([
+            mediaTypeLabel.leadingAnchor.constraint(equalTo: voteAverageLabel.trailingAnchor, constant: 6),
+            mediaTypeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            mediaTypeLabel.widthAnchor.constraint(equalToConstant: 64),
+            mediaTypeLabel.heightAnchor.constraint(equalTo: voteAverageLabel.heightAnchor)
         ])
     }
 }

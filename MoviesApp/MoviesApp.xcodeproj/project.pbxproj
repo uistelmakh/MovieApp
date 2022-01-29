@@ -34,6 +34,8 @@
 		423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C600C2794651600DC4C95 /* TabBarItem.swift */; };
 		423E2DC827A179BA00540472 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423E2DC727A179BA00540472 /* Trend.swift */; };
 		4262408F27424DB30034CDC5 /* BaseConfiguratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */; };
+		4267E69327A56F4800EA369E /* TvPopularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267E69227A56F4800EA369E /* TvPopularItemCell.swift */; };
+		4267E69527A56F6D00EA369E /* TvPopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267E69427A56F6D00EA369E /* TvPopularCell.swift */; };
 		4272E4BA277CACB70094EF6A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272E4B9277CACB70094EF6A /* Movie.swift */; };
 		4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */; };
 		42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E411DF273A742800429FE2 /* AppDelegate.swift */; };
@@ -69,6 +71,8 @@
 		423C600C2794651600DC4C95 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		423E2DC727A179BA00540472 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConfiguratorProtocol.swift; sourceTree = "<group>"; };
+		4267E69227A56F4800EA369E /* TvPopularItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvPopularItemCell.swift; sourceTree = "<group>"; };
+		4267E69427A56F6D00EA369E /* TvPopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvPopularCell.swift; sourceTree = "<group>"; };
 		4272E4B9277CACB70094EF6A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingAssistant.swift; sourceTree = "<group>"; };
 		42E411DC273A742800429FE2 /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +206,7 @@
 		423C60052791B6C600DC4C95 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4267E68D27A56D4600EA369E /* TvPopular */,
 				423C600A2793194100DC4C95 /* Trends  */,
 			);
 			path = Cells;
@@ -222,6 +227,15 @@
 				423C600C2794651600DC4C95 /* TabBarItem.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4267E68D27A56D4600EA369E /* TvPopular */ = {
+			isa = PBXGroup;
+			children = (
+				4267E69427A56F6D00EA369E /* TvPopularCell.swift */,
+				4267E69227A56F4800EA369E /* TvPopularItemCell.swift */,
+			);
+			path = TvPopular;
 			sourceTree = "<group>";
 		};
 		42840047274012E6007BEF11 /* TabBar */ = {
@@ -350,6 +364,7 @@
 				421033FE279E8C4D00F9268D /* APIRequest.swift in Sources */,
 				42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */,
 				423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */,
+				4267E69527A56F6D00EA369E /* TvPopularCell.swift in Sources */,
 				423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */,
 				42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */,
 				423C60072791B6E700DC4C95 /* TrendsCell.swift in Sources */,
@@ -368,6 +383,7 @@
 				423C5FFF27918BBF00DC4C95 /* SearchPresenter.swift in Sources */,
 				42339F83279562120043B419 /* UITableView+SetEmpty.swift in Sources */,
 				423E2DC827A179BA00540472 /* Trend.swift in Sources */,
+				4267E69327A56F4800EA369E /* TvPopularItemCell.swift in Sources */,
 				423C5FF727918BA500DC4C95 /* FavoritesViewController.swift in Sources */,
 				4214030127A041F400BABF4F /* NetworkServiceProtocol.swift in Sources */,
 				42103402279F05D700F9268D /* ErrorResponse.swift in Sources */,

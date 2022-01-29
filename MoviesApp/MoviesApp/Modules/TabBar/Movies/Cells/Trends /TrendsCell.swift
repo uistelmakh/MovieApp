@@ -10,7 +10,11 @@ import UIKit
 /// Ячейка для отображения фильмов в тренде
 final class TrendsCell: UITableViewCell {
     /// массив с трендовыми фильмами
-    var trends: [Trend]?
+    var trends = [Trend]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: - UI
     
@@ -86,11 +90,14 @@ private extension TrendsCell {
 // MARK: - UICollectionViewDataSource
 extension TrendsCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return trends.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TrendsItemCell.self), for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TrendsItemCell.self), for: indexPath) as? TrendsItemCell else { fatalError() }
+        
+        let trend = trends[indexPath.item]
+        cell.configure(with: trend)
         
         return cell
     }

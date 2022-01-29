@@ -14,14 +14,20 @@ import UIKit
 
 /// Логика презентации
 protocol MoviesPresentationLogic {
-
+    /// Ошибка от сервера
+    /// - Parameter text: Текст ошибки
+    func showErrorMessage(text: String)
+    
+    func loadDataSuccess(trends: [Trend])
 }
 
 /// Протокол для работы MoviesPresenter из MoviesViewController
 protocol MoviesViewControllerOutput {
-    
+    /// Загрузка данных
+    func loadData()
 }
 
+/// Презентер VIPER-модуля Фильмов
 final class MoviesPresenter {
     weak var viewController: MoviesDisplayLogic?
     var interactor: MoviesBusinessLogic?
@@ -30,10 +36,22 @@ final class MoviesPresenter {
 
 // MARK: - MoviesPresentationLogic
 extension MoviesPresenter: MoviesPresentationLogic {
+    func loadDataSuccess(trends: [Trend]) {
+        viewController?.loadDataDone(trends: trends)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.reloadRows()
+        }
+    }
     
+    func showErrorMessage(text: String) {
+        
+    }
 }
 
 // MARK: - MoviesViewControllerOutput
 extension MoviesPresenter: MoviesViewControllerOutput {
-    
+    func loadData() {
+        interactor?.retrieveData()
+    }
 }

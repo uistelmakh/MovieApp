@@ -14,7 +14,10 @@ import UIKit
 
 /// Протокол отображения MoviesViewController-а
 protocol MoviesDisplayLogic: AnyObject {
+    func loadDataDone(trends: [Trend])
     
+    /// Обновить ячейки
+    func reloadRows()
 }
 
 /// Главный экран, отображение фильмов
@@ -22,6 +25,9 @@ final class MoviesViewController: UIViewController {
     
     // MARK: - Константные текстовки
     private let titleVC = "Киносмотр 🍿"
+    
+    // MARK: - ViewModels
+    var trends = [Trend]()
     
     // MARK: - UI
     
@@ -49,21 +55,9 @@ final class MoviesViewController: UIViewController {
         setupConstrains()
     }
     
-    var trends = [Trend]()
-    var trendsTotalPages = 0
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        service.getTrending(page: 1) { trendsResponse in
-//            switch trendsResponse {
-//            case .success(let data):
-//                self.trends = data.results
-//                
-//                print(self.trends)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
+        presenter?.loadData()
     }
     
 }
@@ -100,10 +94,14 @@ extension MoviesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TrendsCell.self), for: indexPath) as? TrendsCell else { return UITableViewCell() }
-        
-        
-        return cell
+        switch indexPath.row {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TrendsCell.self), for: indexPath) as? TrendsCell else { fatalError() }
+            cell.trends = self.trends
+            return cell
+        default:
+            fatalError()
+        }
     }
 }
 
@@ -126,5 +124,13 @@ extension MoviesViewController: UITableViewDelegate {
 
 // MARK: - MoviesDisplayLogic
 extension MoviesViewController: MoviesDisplayLogic {
+    func loadDataDone(trends: [Trend]) {
+        self.trends = trends
+    }
     
+    func reloadRows() {
+        let trendsIndexPath = IndexPath(row: 0, section: 0)
+        
+        tableView.reloadRows(at: [trendsIndexPath], with: .fade)
+    }
 }

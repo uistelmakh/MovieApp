@@ -22,7 +22,7 @@ protocol SearchViewControllerOutput {
     
 }
 
-
+/// Презентер VIPER-модуля поиска
 final class SearchPresenter {
   weak var viewController: SearchDisplayLogic?
     var interactor: SearchBusinessLogic?
