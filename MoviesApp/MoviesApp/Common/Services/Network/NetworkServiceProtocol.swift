@@ -9,6 +9,7 @@ import Foundation
 
 typealias GetSearchMovieResponse = Result<SearchMovieResponse, ErrorResponse>
 typealias GetTrendingResponse = Result<TrendingResponse, ErrorResponse>
+typealias GetTvPopularResponse = Result<TvPopularResponse, ErrorResponse>
 
 protocol NetworkServiceProtocol {
     /// Получение списка трендовых фильмов, сериалов, актеров
@@ -16,6 +17,8 @@ protocol NetworkServiceProtocol {
     ///   - page: Номер страницы
     ///   - completion: Result<SearchMovieResponse, ErrorResponse>
     func getTrending(page: Int, completion: @escaping (GetTrendingResponse) -> Void)
+    
+    func getTvPopular(page: Int, completion: @escaping (GetTvPopularResponse) -> Void)
     
     /// Получение списка фильмов по поисковому запросу
     /// - Parameters:

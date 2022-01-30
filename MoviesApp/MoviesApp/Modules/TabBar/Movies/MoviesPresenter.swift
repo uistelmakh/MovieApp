@@ -18,7 +18,7 @@ protocol MoviesPresentationLogic {
     /// - Parameter text: Текст ошибки
     func showErrorMessage(text: String)
     
-    func loadDataSuccess(trends: [Trend])
+    func loadDataSuccess(trends: [Trend], tvPopulars: [TvPopular])
 }
 
 /// Протокол для работы MoviesPresenter из MoviesViewController
@@ -36,8 +36,8 @@ final class MoviesPresenter {
 
 // MARK: - MoviesPresentationLogic
 extension MoviesPresenter: MoviesPresentationLogic {
-    func loadDataSuccess(trends: [Trend]) {
-        viewController?.loadDataDone(trends: trends)
+    func loadDataSuccess(trends: [Trend], tvPopulars: [TvPopular]) {
+        viewController?.loadDataDone(trends: trends, tvPopulars: tvPopulars)
         
         DispatchQueue.main.async { [weak self] in
             self?.viewController?.reloadRows()

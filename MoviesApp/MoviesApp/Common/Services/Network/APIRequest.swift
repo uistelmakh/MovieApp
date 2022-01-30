@@ -16,9 +16,9 @@ final class APIRequest {
     /// Список эндпоинтов API
     private enum Endpoints {
         /// api ключ
-        static let apiKey: String = "085d77c49ba84a11530b5ffc1f132126"
+        static let apiKey: String = GlobalConsts.Network.apiKey
         /// url дефолтный
-        static let baseUrl: String = "api.themoviedb.org"
+        static let baseUrl: String = GlobalConsts.Network.baseURL
         /// версия апи
         static let apiVersion: Int = 3
         static let defaultQueryItems = [
@@ -38,7 +38,7 @@ final class APIRequest {
         }
         
         case getTrending(Int)
-        //case searchMovie(String, Bool)
+        case getTvPopular(Int)
         
         /// url
         var url: URL? {
@@ -51,6 +51,13 @@ final class APIRequest {
                 let path = "/trending/all/week"
                 return makeUrl(path: path, queryItems: queryItems)
                 
+                /// url популярных сериалов на тв
+            case .getTvPopular(let page):
+                let path = "/tv/popular"
+                let queryItems = [
+                    URLQueryItem(name: "page", value: "\(page)")
+                ] + Endpoints.defaultQueryItems
+                return makeUrl(path: path, queryItems: queryItems)
             }
         }
     }
@@ -96,5 +103,17 @@ extension APIRequest: NetworkServiceProtocol {
     
     func searchMovie(query: String, includeAdult: Bool, completion: @escaping (GetSearchMovieResponse) -> Void) {
         
+    }
+    
+    func getTvPopular(page: Int, completion: @escaping (GetTvPopularResponse) -> Void) {
+        guard let url = Endpoints.getTvPopular(page).url else { return }
+        request(url: url, responseType: TvPopularResponse.self) { tvPopularResponse, error in
+            if let error = error {
+                completion(.failure(error as? ErrorResponse ?? .unknown))
+            } else {
+                guard let tvPopularResponse = tvPopularResponse else { fatalError() }
+                completion(.success(tvPopularResponse))
+            }
+        }
     }
 }

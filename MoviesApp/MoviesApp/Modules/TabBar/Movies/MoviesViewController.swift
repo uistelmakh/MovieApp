@@ -14,7 +14,7 @@ import UIKit
 
 /// Протокол отображения MoviesViewController-а
 protocol MoviesDisplayLogic: AnyObject {
-    func loadDataDone(trends: [Trend])
+    func loadDataDone(trends: [Trend], tvPopulars: [TvPopular])
     
     /// Обновить ячейки
     func reloadRows()
@@ -28,6 +28,7 @@ final class MoviesViewController: UIViewController {
     
     // MARK: - ViewModels
     var trends = [Trend]()
+    var tvPopulars = [TvPopular]()
     
     // MARK: - UI
     
@@ -37,6 +38,7 @@ final class MoviesViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.register(TrendsCell.self, forCellReuseIdentifier: String(describing: TrendsCell.self))
+        tableView.register(TvPopularCell.self, forCellReuseIdentifier: String(describing: TvPopularCell.self))
         return tableView
     }()
     
@@ -90,7 +92,7 @@ private extension MoviesViewController {
 // MARK: - UITableViewDataSource
 extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,6 +100,11 @@ extension MoviesViewController: UITableViewDataSource {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TrendsCell.self), for: indexPath) as? TrendsCell else { fatalError() }
             cell.trends = self.trends
+            return cell
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TvPopularCell.self), for: indexPath) as? TvPopularCell else { fatalError() }
+            
+            cell.tvPopulars = self.tvPopulars
             return cell
         default:
             fatalError()
@@ -116,6 +123,8 @@ extension MoviesViewController: UITableViewDelegate {
         // Ячейка трендов
         case 0:
             return 280
+        case 1:
+            return 180
         default:
             fatalError()
         }
@@ -124,13 +133,15 @@ extension MoviesViewController: UITableViewDelegate {
 
 // MARK: - MoviesDisplayLogic
 extension MoviesViewController: MoviesDisplayLogic {
-    func loadDataDone(trends: [Trend]) {
+    func loadDataDone(trends: [Trend], tvPopulars: [TvPopular]) {
         self.trends = trends
+        self.tvPopulars = tvPopulars
     }
     
     func reloadRows() {
         let trendsIndexPath = IndexPath(row: 0, section: 0)
-        
+        let tvPopularIndexPath = IndexPath(row: 1, section: 0)
         tableView.reloadRows(at: [trendsIndexPath], with: .fade)
+        tableView.reloadRows(at: [tvPopularIndexPath], with: .fade)
     }
 }

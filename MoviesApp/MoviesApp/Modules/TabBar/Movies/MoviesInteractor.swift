@@ -25,9 +25,7 @@ final class MoviesInteractor {
     private var trendsPage: Int = 1
     private var trendsTotalPages: Int = 1
     
-    
-    
-    
+    private var tvPopularsPage: Int = 1
 }
 
 // MARK: - MoviesBusinessLogic
@@ -35,22 +33,32 @@ extension MoviesInteractor: MoviesBusinessLogic {
     func retrieveData() {
         
         var trends = [Trend]()
-        var trendsTotalPages = 0
+        var tvPopulars = [TvPopular]()
         
         let dispatchGroup = DispatchGroup()
         
         service.getTrending(page: trendsPage) { trendsResponse in
             switch trendsResponse {
             case .success(let data):
-                //trendsTotalPages = data.totalPages
                 trends = data.results
             case .failure(let error):
                 self.presenter?.showErrorMessage(text: error.message)
             }
         }
         
+        service.getTvPopular(page: tvPopularsPage) { tvPopularsResponse in
+            switch tvPopularsResponse {
+            case .success(let data):
+                tvPopulars = data.results
+                //print(tvPopulars)
+            case .failure(let error):
+                self.presenter?.showErrorMessage(text: error.message)
+            }
+        }
+        
+        
         dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.presenter?.loadDataSuccess(trends: trends)
+            self?.presenter?.loadDataSuccess(trends: trends, tvPopulars: tvPopulars)
         }
     }
 }
