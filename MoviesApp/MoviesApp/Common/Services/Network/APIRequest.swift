@@ -40,6 +40,8 @@ final class APIRequest {
         case getTrending(Int)
         case getTvPopular(Int)
         
+        case searchMovie(String, Bool)
+        
         /// url
         var url: URL? {
             switch self {
@@ -56,6 +58,15 @@ final class APIRequest {
                 let path = "/tv/popular"
                 let queryItems = [
                     URLQueryItem(name: "page", value: "\(page)")
+                ] + Endpoints.defaultQueryItems
+                return makeUrl(path: path, queryItems: queryItems)
+                
+                /// url для поиска фильмов
+            case .searchMovie(let query, let includeAdult):
+                let path = "/search/movie"
+                let queryItems = [
+                    URLQueryItem(name: "query", value: query),
+                    URLQueryItem(name: "include_adult", value: includeAdult ? "true": "false")
                 ] + Endpoints.defaultQueryItems
                 return makeUrl(path: path, queryItems: queryItems)
             }
@@ -86,8 +97,6 @@ final class APIRequest {
 
 // MARK: - NetworkServiceProtocol
 extension APIRequest: NetworkServiceProtocol {
-    
-    // Получаем трендовые фильмы, сериалы и актеров
     func getTrending(page: Int, completion: @escaping (GetTrendingResponse) -> Void) {
         guard let url = Endpoints.getTrending(page).url else { return }
         
@@ -102,12 +111,22 @@ extension APIRequest: NetworkServiceProtocol {
     }
     
     func searchMovie(query: String, includeAdult: Bool, completion: @escaping (GetSearchMovieResponse) -> Void) {
+        guard let url = Endpoints.searchMovie(query, includeAdult).url else { return }
         
+        request(url: url, responseType: SearchMovieResponse.self) { searchMovieResponse, error in
+            if let error = error {
+                completion(.failure(error as? ErrorResponse ?? .unknown))
+            } else {
+                guard let searchMovieResponse = searchMovieResponse else { fatalError() }
+                completion(.success(searchMovieResponse))
+            }
+        }
     }
     
     func getTvPopular(page: Int, completion: @escaping (GetTvPopularResponse) -> Void) {
         guard let url = Endpoints.getTvPopular(page).url else { return }
         request(url: url, responseType: TvPopularResponse.self) { tvPopularResponse, error in
+            
             if let error = error {
                 completion(.failure(error as? ErrorResponse ?? .unknown))
             } else {

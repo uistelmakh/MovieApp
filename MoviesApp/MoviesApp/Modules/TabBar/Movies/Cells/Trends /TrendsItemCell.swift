@@ -9,7 +9,6 @@ import UIKit
 
 /// Отображение фильма трендового в ячейке
 final class TrendsItemCell: UICollectionViewCell {
-    
     private let imageNetworkService: ImageLoadServiceProtocol = ImageLoadService.shared
     
     // MARK: - UI

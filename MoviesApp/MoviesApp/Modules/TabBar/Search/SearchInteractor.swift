@@ -13,15 +13,21 @@
 import UIKit
 
 protocol SearchBusinessLogic {
-  
+    /// Получаем данные
+    /// - Parameter query: запрос
+    func retrieveSearchMovie(query: String)
 }
 
 
 final class SearchInteractor {
     var presenter: SearchPresentationLogic?
+    
+    private var service: NetworkServiceProtocol = APIRequest.shared
 }
 
 // MARK: - SearchBusinessLogic
 extension SearchInteractor: SearchBusinessLogic {
-    
+    func retrieveSearchMovie(query: String) {
+        
+    }
 }

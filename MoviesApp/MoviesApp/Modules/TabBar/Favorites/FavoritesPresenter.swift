@@ -12,14 +12,26 @@
 
 import UIKit
 
-protocol FavoritesPresentationLogic
-{
+protocol FavoritesPresentationLogic {
   
 }
 
-class FavoritesPresenter: FavoritesPresentationLogic
-{
-  weak var viewController: FavoritesDisplayLogic?
-  
-  
+protocol FavoritesViewControllerOutput {
+    
+}
+
+final class FavoritesPresenter {
+    weak var viewController: FavoritesDisplayLogic?
+    var interactor: FavoritesBusinessLogic?
+    var router: FavoritesRoutingLogic?
+}
+
+// MARK: - FavoritesPresentationLogic
+extension FavoritesPresenter: FavoritesPresentationLogic {
+    
+}
+
+// MARK: - FavoritesViewControllerOutput
+extension FavoritesPresenter: FavoritesViewControllerOutput {
+    
 }

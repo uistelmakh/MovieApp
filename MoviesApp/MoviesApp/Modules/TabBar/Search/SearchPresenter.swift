@@ -19,12 +19,12 @@ protocol SearchPresentationLogic {
 
 /// Протокол для работы SearchPresenter из SearchViewController
 protocol SearchViewControllerOutput {
-    
+    func presentSettingsScreen(view: UIViewController)
 }
 
 /// Презентер VIPER-модуля поиска
 final class SearchPresenter {
-  weak var viewController: SearchDisplayLogic?
+    weak var viewController: SearchDisplayLogic?
     var interactor: SearchBusinessLogic?
     var router: SearchRoutingLogic?
 }
@@ -36,5 +36,7 @@ extension SearchPresenter: SearchPresentationLogic {
 
 // MARK: - SearchViewControllerOutput
 extension SearchPresenter: SearchViewControllerOutput {
-    
+    func presentSettingsScreen(view: UIViewController) {
+        router?.presentSettingsScreen(from: view)
+    }
 }

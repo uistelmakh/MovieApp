@@ -12,12 +12,16 @@ typealias GetTrendingResponse = Result<TrendingResponse, ErrorResponse>
 typealias GetTvPopularResponse = Result<TvPopularResponse, ErrorResponse>
 
 protocol NetworkServiceProtocol {
-    /// Получение списка трендовых фильмов, сериалов, актеров
+    /// Получение списка трендовых фильмов, сериалов
     /// - Parameters:
     ///   - page: Номер страницы
     ///   - completion: Result<SearchMovieResponse, ErrorResponse>
     func getTrending(page: Int, completion: @escaping (GetTrendingResponse) -> Void)
     
+    ///  Получение списка популярных сериалов на тв
+    /// - Parameters:
+    ///   - page: Номер страницы
+    ///   - completion: Result<TvPopularResponse, ErrorResponse>
     func getTvPopular(page: Int, completion: @escaping (GetTvPopularResponse) -> Void)
     
     /// Получение списка фильмов по поисковому запросу
@@ -26,5 +30,4 @@ protocol NetworkServiceProtocol {
     ///   - includeAdult: Фильмы 18+
     ///   - completion: Result<SearchMovieResponse, ErrorResponse>
     func searchMovie(query: String, includeAdult: Bool, completion: @escaping (GetSearchMovieResponse) -> Void)
-    
 }

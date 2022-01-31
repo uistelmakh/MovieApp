@@ -37,6 +37,7 @@ final class MoviesViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(TrendsCell.self, forCellReuseIdentifier: String(describing: TrendsCell.self))
         tableView.register(TvPopularCell.self, forCellReuseIdentifier: String(describing: TvPopularCell.self))
         return tableView

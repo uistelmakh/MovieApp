@@ -32,6 +32,7 @@ final class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
         return tableView
     }()
@@ -61,8 +62,7 @@ final class SearchViewController: UIViewController {
 private extension SearchViewController {
     func setup() {
         view.backgroundColor = .white
-        title = titleVC
-        navigationController?.navigationBar.prefersLargeTitles = true
+        setupNavigationBar()
         
         // SearchController
         searchController.obscuresBackgroundDuringPresentation = false
@@ -74,6 +74,19 @@ private extension SearchViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setupNavigationBar() {
+        title = titleVC
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        let filterBarButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(showFilter))
+        
+        navigationItem.rightBarButtonItem = filterBarButton
+    }
+    
+    @objc func showFilter() {
+        presenter?.presentSettingsScreen(view: self)
     }
 }
 
