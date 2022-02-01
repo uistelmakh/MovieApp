@@ -89,7 +89,6 @@ private extension TvPopularCell {
 // MARK: - UICollectionViewDataSource
 extension TvPopularCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(tvPopulars.count)
         return tvPopulars.count
     }
     

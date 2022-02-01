@@ -21,13 +21,22 @@ protocol SearchBusinessLogic {
 
 final class SearchInteractor {
     var presenter: SearchPresentationLogic?
-    
+    private let defaults = UserDefaults.standard
     private var service: NetworkServiceProtocol = APIRequest.shared
 }
 
 // MARK: - SearchBusinessLogic
 extension SearchInteractor: SearchBusinessLogic {
     func retrieveSearchMovie(query: String) {
-        
+        let includeAdult = defaults.bool(forKey: SearchSettingsInteractor.adultFilterValue)
+        service.searchMovie(query: query, includeAdult: includeAdult) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.presenter?.searchMovieSuccess(movies: data.results)
+            case .failure(let error):
+                _ = error
+                self?.presenter?.searchMovieFailure()
+            }
+        }
     }
 }

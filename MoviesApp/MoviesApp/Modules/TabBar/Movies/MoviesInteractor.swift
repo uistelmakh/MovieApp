@@ -50,7 +50,6 @@ extension MoviesInteractor: MoviesBusinessLogic {
             switch tvPopularsResponse {
             case .success(let data):
                 tvPopulars = data.results
-                //print(tvPopulars)
             case .failure(let error):
                 self.presenter?.showErrorMessage(text: error.message)
             }

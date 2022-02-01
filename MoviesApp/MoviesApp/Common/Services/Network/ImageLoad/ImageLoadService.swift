@@ -13,11 +13,7 @@ protocol ImageLoadServiceProtocol {
 }
 
 final class ImageLoadService: ImageLoadServiceProtocol {
-    static var shared: ImageLoadServiceProtocol = {
-        let instance = ImageLoadService()
-        return instance
-    }()
-    
+    static var shared: ImageLoadServiceProtocol = ImageLoadService()
     
     private init() {}
 
