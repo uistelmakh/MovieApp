@@ -1,16 +1,16 @@
 //
-//  TrendsCell.swift
+//  TvPopularCell.swift
 //  MoviesApp
 //
-//  Created by Sergey Stelmakh on 14.01.2022.
+//  Created by Sergey Stelmakh on 29.01.2022.
 //
 
 import UIKit
 
-/// Ячейка для отображения фильмов в тренде
-final class TrendsCell: UITableViewCell {
-    /// массив с трендовыми фильмами
-    var trends = [Trend]() {
+/// Ячейка для отображения популярных сериалов на тв
+final class TvPopularCell: UITableViewCell {
+    /// массив с популярными сериалами на тв
+    var tvPopulars = [TvPopular]() {
         didSet {
             collectionView.reloadData()
         }
@@ -22,7 +22,7 @@ final class TrendsCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24, weight: .black)
-        label.text = "Тренды этой недели"
+        label.text = "Популярно на ТВ"
         return label
     }()
     
@@ -30,10 +30,9 @@ final class TrendsCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(TrendsItemCell.self, forCellWithReuseIdentifier: String(describing: TrendsItemCell.self))
+        collectionView.register(TvPopularItemCell.self, forCellWithReuseIdentifier: String(describing: TvPopularItemCell.self))
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isPagingEnabled = true
         return collectionView
     }()
     
@@ -50,7 +49,7 @@ final class TrendsCell: UITableViewCell {
 }
 
 // MARK: - Setup
-private extension TrendsCell {
+private extension TvPopularCell {
     func setup() {
         contentView.backgroundColor = .white
         
@@ -65,11 +64,10 @@ private extension TrendsCell {
 }
 
 // MARK: - Setup Constraints
-private extension TrendsCell {
+private extension TvPopularCell {
     func setupConstraints() {
         
         // titleLabel
-        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -88,34 +86,30 @@ private extension TrendsCell {
 }
 
 // MARK: - UICollectionViewDataSource
-extension TrendsCell: UICollectionViewDataSource {
+extension TvPopularCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trends.count
+        return tvPopulars.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TrendsItemCell.self), for: indexPath) as? TrendsItemCell else { fatalError() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TvPopularItemCell.self), for: indexPath) as? TvPopularItemCell else { fatalError() }
         
-        let trend = trends[indexPath.item]
-        cell.configure(with: trend)
+        let tvPopular = tvPopulars[indexPath.item]
+        cell.configure(with: tvPopular)
         
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate
-extension TrendsCell: UICollectionViewDelegate {
+extension TvPopularCell: UICollectionViewDelegate {
     
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension TrendsCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
-    }
-    
+extension TvPopularCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.size.width - 16, height: frame.size.height - titleLabel.frame.size.height - 8 - 16)
+        return CGSize(width: collectionView.frame.width/2, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

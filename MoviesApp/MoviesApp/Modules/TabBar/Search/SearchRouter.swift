@@ -13,6 +13,7 @@
 import UIKit
 
 protocol SearchRoutingLogic {
+    func presentSettingsScreen(from view: UIViewController)
 }
 
 
@@ -24,5 +25,9 @@ final class SearchRouter {
 }
 // MARK: - SearchRoutingLogic
 extension SearchRouter: SearchRoutingLogic {
-    
+    func presentSettingsScreen(from view: UIViewController) {
+        let searchSettingsViewController = SearchSettingsViewController()
+        SearchSettingsConfigurator().configure(viewController: searchSettingsViewController, navigationController: navigationController)
+        navigationController?.pushViewController(searchSettingsViewController, animated: true)
+    }
 }

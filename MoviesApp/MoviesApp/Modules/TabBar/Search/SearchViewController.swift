@@ -14,7 +14,8 @@ import UIKit
 
 /// Протокол отображения SearchViewController-а
 protocol SearchDisplayLogic: AnyObject {
-  
+    /// вью модель
+    var searchResults: [SearchMovie] { get set }
 }
 
 /// Экран поиска фильмов
@@ -32,17 +33,26 @@ final class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
         return tableView
     }()
     
-    // MARK: - Params
-    
-    /// фильмы
-    var films = [String]()
+    // MARK: - ViewModels
+    var searchResults = [SearchMovie]() {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+        }
+    }
   
+    // MARK: - Params
     /// Ссылка на слой презентации
     var presenter: SearchViewControllerOutput?
+    
+    private var workItemReference: DispatchWorkItem?
     
     // MARK: View lifecycle
     override func viewDidLoad() {
@@ -61,8 +71,7 @@ final class SearchViewController: UIViewController {
 private extension SearchViewController {
     func setup() {
         view.backgroundColor = .white
-        title = titleVC
-        navigationController?.navigationBar.prefersLargeTitles = true
+        setupNavigationBar()
         
         // SearchController
         searchController.obscuresBackgroundDuringPresentation = false
@@ -74,6 +83,19 @@ private extension SearchViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setupNavigationBar() {
+        title = titleVC
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        let filterBarButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(showFilter))
+        
+        navigationItem.rightBarButtonItem = filterBarButton
+    }
+    
+    @objc func showFilter() {
+        presenter?.presentSettingsScreen(view: self)
     }
 }
 
@@ -93,19 +115,23 @@ private extension SearchViewController {
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if films.count == 0 {
-            tableView.setEmptyView(title: "У вас нет задач 🤷‍♂️", message: "Введите название фильма в поиск")
+        if searchResults.count == 0 {
+            tableView.setEmptyView(title: "Поиск фильмов", message: "Введите название фильма в поиск")
         }
         else {
             tableView.restore()
         }
         
-        return 0
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchCell.self), for: indexPath) as? SearchCell else { return UITableViewCell() }
         
+        cell.selectionStyle = .none
+        
+        let searchMovie = searchResults[indexPath.row]
+        cell.configure(with: searchMovie)
         
         return cell
     }
@@ -118,7 +144,20 @@ extension SearchViewController: UITableViewDelegate {
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Отменить текущий ожидающий элемент
+        workItemReference?.cancel()
+
+        // Получаем данные
+        let filmsSearchWorkItem = DispatchWorkItem {
+            self.presenter?.searchMovie(name: searchText)
+        }
+        
+        // Сохраняем текущее значение и выполняем через 0.3 секунды
+        workItemReference = filmsSearchWorkItem
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: filmsSearchWorkItem)
+    }
 }
 
 // MARK: - SearchDisplayLogic

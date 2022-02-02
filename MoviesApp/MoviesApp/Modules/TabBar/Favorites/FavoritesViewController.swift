@@ -12,24 +12,22 @@
 
 import UIKit
 
-protocol FavoritesDisplayLogic: class
-{
+protocol FavoritesDisplayLogic: AnyObject {
   
 }
 
-class FavoritesViewController: UIViewController, FavoritesDisplayLogic
-{
-  var interactor: FavoritesBusinessLogic?
-  var router: (NSObjectProtocol & FavoritesRoutingLogic & FavoritesDataPassing)?
-
-  
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
+final class FavoritesViewController: UIViewController {
+    /// Ссылка на слой презентации
+    var presenter: FavoritesViewControllerOutput?
     
-  }
-  
+    // MARK: View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
+
+// MARK: - FavoritesDisplayLogic
+extension FavoritesViewController: FavoritesDisplayLogic {
+    
 }

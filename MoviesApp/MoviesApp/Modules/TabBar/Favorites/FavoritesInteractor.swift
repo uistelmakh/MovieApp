@@ -12,20 +12,14 @@
 
 import UIKit
 
-protocol FavoritesBusinessLogic
-{
-  
+protocol FavoritesBusinessLogic {
 }
 
-protocol FavoritesDataStore
-{
-  //var name: String { get set }
+final class FavoritesInteractor {
+    var presenter: FavoritesPresentationLogic?
 }
 
-class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore
-{
-  var presenter: FavoritesPresentationLogic?
-  //var name: String = ""
-  
-  
+// MARK: - FavoritesBusinessLogic
+extension FavoritesInteractor: FavoritesBusinessLogic {
+    
 }
