@@ -33,6 +33,7 @@ final class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
         return tableView
@@ -126,6 +127,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchCell.self), for: indexPath) as? SearchCell else { return UITableViewCell() }
+        
         cell.selectionStyle = .none
         
         let searchMovie = searchResults[indexPath.row]

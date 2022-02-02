@@ -102,7 +102,7 @@ final class TrendsItemCell: UICollectionViewCell {
 // MARK: - Setup
 private extension TrendsItemCell {
     func setup() {
-        contentView.backgroundColor = .red
+        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
         
         contentView.addSubview(imageView)

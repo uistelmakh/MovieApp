@@ -38,6 +38,7 @@ final class APIRequest {
         }
         
         case getTrending(Int)
+        case getNowPlaying(Int)
         case getTvPopular(Int)
         
         case searchMovie(String, Bool)
@@ -51,6 +52,14 @@ final class APIRequest {
                     URLQueryItem(name: "page", value: "\(page)")
                 ] + Endpoints.defaultQueryItems
                 let path = "/trending/all/week"
+                return makeUrl(path: path, queryItems: queryItems)
+                
+                /// url фильмов идущих в кино
+            case .getNowPlaying(let page):
+                let queryItems = [
+                    URLQueryItem(name: "page", value: "\(page)")
+                ] + Endpoints.defaultQueryItems
+                let path = "/movie/now_playing"
                 return makeUrl(path: path, queryItems: queryItems)
                 
                 /// url популярных сериалов на тв
@@ -97,6 +106,19 @@ final class APIRequest {
 
 // MARK: - NetworkServiceProtocol
 extension APIRequest: NetworkServiceProtocol {
+    func getNowPlaying(page: Int, completion: @escaping (GetNowPlayingResponse) -> Void) {
+        guard let url = Endpoints.getNowPlaying(page).url else { return }
+        
+        request(url: url, responseType: NowPlayingResponse.self){ nowPlayingResponse, error in
+            if let error = error {
+                completion(.failure(error as? ErrorResponse ?? .unknown))
+            } else {
+                guard let nowPlayingResponse = nowPlayingResponse else { fatalError() }
+                completion(.success(nowPlayingResponse))
+            }
+        }
+    }
+    
     func getTrending(page: Int, completion: @escaping (GetTrendingResponse) -> Void) {
         guard let url = Endpoints.getTrending(page).url else { return }
         

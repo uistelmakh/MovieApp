@@ -14,6 +14,7 @@ protocol ImageLoadServiceProtocol {
 
 final class ImageLoadService: ImageLoadServiceProtocol {
     static var shared: ImageLoadServiceProtocol = ImageLoadService()
+    private let imageCacheService: ImageCacheServiceProtocol = ImageCacheService.shared
     
     private init() {}
 
@@ -33,6 +34,10 @@ final class ImageLoadService: ImageLoadServiceProtocol {
     }
     
     func getImageFrom(_ urlString: String, completion: @escaping (UIImage?) -> Void) {
-        downloadImage(urlString: urlString, completion: completion)
+        guard let cashedImage = imageCacheService.getCashedImage(url: urlString) else {
+            downloadImage(urlString: urlString, completion: completion)
+            return
+        }
+        completion(cashedImage)
     }
 }

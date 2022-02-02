@@ -25,6 +25,8 @@ final class MoviesInteractor {
     private var trendsPage: Int = 1
     private var trendsTotalPages: Int = 1
     
+    private var nowPlayingPage: Int = 1
+    
     private var tvPopularsPage: Int = 1
 }
 
@@ -33,6 +35,7 @@ extension MoviesInteractor: MoviesBusinessLogic {
     func retrieveData() {
         
         var trends = [Trend]()
+        var nowPlaying = [NowPlaying]()
         var tvPopulars = [TvPopular]()
         
         let dispatchGroup = DispatchGroup()
@@ -41,6 +44,15 @@ extension MoviesInteractor: MoviesBusinessLogic {
             switch trendsResponse {
             case .success(let data):
                 trends = data.results
+            case .failure(let error):
+                self.presenter?.showErrorMessage(text: error.message)
+            }
+        }
+        
+        service.getNowPlaying(page: nowPlayingPage) { nowPlayingResponse in
+            switch nowPlayingResponse {
+            case .success(let data):
+                nowPlaying = data.results
             case .failure(let error):
                 self.presenter?.showErrorMessage(text: error.message)
             }
@@ -55,9 +67,8 @@ extension MoviesInteractor: MoviesBusinessLogic {
             }
         }
         
-        
         dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.presenter?.loadDataSuccess(trends: trends, tvPopulars: tvPopulars)
+            self?.presenter?.loadDataSuccess(trends: trends, tvPopulars: tvPopulars, nowPlayings: nowPlaying)
         }
     }
 }

@@ -1,28 +1,27 @@
 //
-//  TvPopularCell.swift
+//  NowPlayingCell.swift
 //  MoviesApp
 //
-//  Created by Sergey Stelmakh on 29.01.2022.
+//  Created by Sergey Stelmakh on 02.02.2022.
 //
 
 import UIKit
 
-/// Ячейка для отображения популярных сериалов на тв
-final class TvPopularCell: UITableViewCell {
-    /// массив с популярными сериалами на тв
-    var tvPopulars = [TvPopular]() {
+/// Ячейка для отображения фильмов в кино
+final class NowPlayingCell: UITableViewCell {
+    /// массив с фильмами в кино
+    var nowPlaying = [NowPlaying]() {
         didSet {
             collectionView.reloadData()
         }
     }
     
     // MARK: - UI
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24, weight: .black)
-        label.text = "Популярно на ТВ"
+        label.text = "Сейчас в кино"
         return label
     }()
     
@@ -30,7 +29,7 @@ final class TvPopularCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(TvPopularItemCell.self, forCellWithReuseIdentifier: String(describing: TvPopularItemCell.self))
+        collectionView.register(NowPlayingItem.self, forCellWithReuseIdentifier: String(describing: NowPlayingItem.self))
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -49,7 +48,7 @@ final class TvPopularCell: UITableViewCell {
 }
 
 // MARK: - Setup
-private extension TvPopularCell {
+private extension NowPlayingCell {
     func setup() {
         contentView.backgroundColor = .white
         
@@ -64,9 +63,8 @@ private extension TvPopularCell {
 }
 
 // MARK: - Setup Constraints
-private extension TvPopularCell {
+private extension NowPlayingCell {
     func setupConstraints() {
-        
         // titleLabel
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -86,30 +84,30 @@ private extension TvPopularCell {
 }
 
 // MARK: - UICollectionViewDataSource
-extension TvPopularCell: UICollectionViewDataSource {
+extension NowPlayingCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tvPopulars.count
+        return nowPlaying.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TvPopularItemCell.self), for: indexPath) as? TvPopularItemCell else { fatalError() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NowPlayingItem.self), for: indexPath) as? NowPlayingItem else { fatalError() }
         
-        let tvPopular = tvPopulars[indexPath.item]
-        cell.configure(with: tvPopular)
+        let nowPlaying = nowPlaying[indexPath.item]
+        cell.configure(with: nowPlaying)
         
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate
-extension TvPopularCell: UICollectionViewDelegate {
+extension NowPlayingCell: UICollectionViewDelegate {
     
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension TvPopularCell: UICollectionViewDelegateFlowLayout {
+extension NowPlayingCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width/4, height: collectionView.frame.height * 0.9)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
