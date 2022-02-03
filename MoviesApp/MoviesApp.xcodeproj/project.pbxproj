@@ -30,6 +30,16 @@
 		42339F802795581A0043B419 /* SearchConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42339F7F2795581A0043B419 /* SearchConfigurator.swift */; };
 		42339F83279562120043B419 /* UITableView+SetEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42339F82279562120043B419 /* UITableView+SetEmpty.swift */; };
 		42339F862796E0D60043B419 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42339F852796E0D60043B419 /* SearchCell.swift */; };
+		4237DD1B27AC8F190011DD94 /* MoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD1527AC8F190011DD94 /* MoviePresenter.swift */; };
+		4237DD1D27AC8F190011DD94 /* MovieRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD1727AC8F190011DD94 /* MovieRouter.swift */; };
+		4237DD1F27AC8F190011DD94 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD1927AC8F190011DD94 /* MovieViewController.swift */; };
+		4237DD2027AC8F190011DD94 /* MovieInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD1A27AC8F190011DD94 /* MovieInteractor.swift */; };
+		4237DD2227AC93790011DD94 /* MovieConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD2127AC93790011DD94 /* MovieConfigurator.swift */; };
+		4237DD2B27AC94660011DD94 /* TvSerialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD2527AC94660011DD94 /* TvSerialPresenter.swift */; };
+		4237DD2D27AC94660011DD94 /* TvSerialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD2727AC94660011DD94 /* TvSerialRouter.swift */; };
+		4237DD2F27AC94660011DD94 /* TvSerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD2927AC94660011DD94 /* TvSerialViewController.swift */; };
+		4237DD3027AC94660011DD94 /* TvSerialInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD2A27AC94660011DD94 /* TvSerialInteractor.swift */; };
+		4237DD3227AC966A0011DD94 /* TvSerialConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4237DD3127AC966A0011DD94 /* TvSerialConfigurator.swift */; };
 		423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FED27918BA500DC4C95 /* FavoritesPresenter.swift */; };
 		423C5FF527918BA500DC4C95 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FEF27918BA500DC4C95 /* FavoritesRouter.swift */; };
 		423C5FF727918BA500DC4C95 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C5FF127918BA500DC4C95 /* FavoritesViewController.swift */; };
@@ -79,6 +89,16 @@
 		42339F7F2795581A0043B419 /* SearchConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConfigurator.swift; sourceTree = "<group>"; };
 		42339F82279562120043B419 /* UITableView+SetEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SetEmpty.swift"; sourceTree = "<group>"; };
 		42339F852796E0D60043B419 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		4237DD1527AC8F190011DD94 /* MoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePresenter.swift; sourceTree = "<group>"; };
+		4237DD1727AC8F190011DD94 /* MovieRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRouter.swift; sourceTree = "<group>"; };
+		4237DD1927AC8F190011DD94 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		4237DD1A27AC8F190011DD94 /* MovieInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInteractor.swift; sourceTree = "<group>"; };
+		4237DD2127AC93790011DD94 /* MovieConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieConfigurator.swift; sourceTree = "<group>"; };
+		4237DD2527AC94660011DD94 /* TvSerialPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvSerialPresenter.swift; sourceTree = "<group>"; };
+		4237DD2727AC94660011DD94 /* TvSerialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvSerialRouter.swift; sourceTree = "<group>"; };
+		4237DD2927AC94660011DD94 /* TvSerialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvSerialViewController.swift; sourceTree = "<group>"; };
+		4237DD2A27AC94660011DD94 /* TvSerialInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvSerialInteractor.swift; sourceTree = "<group>"; };
+		4237DD3127AC966A0011DD94 /* TvSerialConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvSerialConfigurator.swift; sourceTree = "<group>"; };
 		423C5FED27918BA500DC4C95 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		423C5FEF27918BA500DC4C95 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
 		423C5FF127918BA500DC4C95 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +171,8 @@
 		42116D23273A785E00926968 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4237DD2427AC94530011DD94 /* TvSerial */,
+				4237DD1427AC8EFB0011DD94 /* Movie */,
 				42840047274012E6007BEF11 /* TabBar */,
 			);
 			path = Modules;
@@ -227,6 +249,37 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		4237DD1427AC8EFB0011DD94 /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				4237DD1927AC8F190011DD94 /* MovieViewController.swift */,
+				4237DD1527AC8F190011DD94 /* MoviePresenter.swift */,
+				4237DD1A27AC8F190011DD94 /* MovieInteractor.swift */,
+				4237DD1727AC8F190011DD94 /* MovieRouter.swift */,
+				4237DD2127AC93790011DD94 /* MovieConfigurator.swift */,
+			);
+			path = Movie;
+			sourceTree = "<group>";
+		};
+		4237DD2327AC93D30011DD94 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4237DD2427AC94530011DD94 /* TvSerial */ = {
+			isa = PBXGroup;
+			children = (
+				4237DD2927AC94660011DD94 /* TvSerialViewController.swift */,
+				4237DD2527AC94660011DD94 /* TvSerialPresenter.swift */,
+				4237DD2A27AC94660011DD94 /* TvSerialInteractor.swift */,
+				4237DD2727AC94660011DD94 /* TvSerialRouter.swift */,
+				4237DD3127AC966A0011DD94 /* TvSerialConfigurator.swift */,
+			);
+			path = TvSerial;
+			sourceTree = "<group>";
+		};
 		423C5FEB27918AFF00DC4C95 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +328,7 @@
 		423C600B279464F600DC4C95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4237DD2327AC93D30011DD94 /* Cells */,
 				423C600C2794651600DC4C95 /* TabBarItem.swift */,
 			);
 			path = Views;
@@ -423,16 +477,23 @@
 				42339F862796E0D60043B419 /* SearchCell.swift in Sources */,
 				42A7D48F27A6D49900A450A1 /* GlobalConsts.swift in Sources */,
 				423C5FF827918BA500DC4C95 /* FavoritesInteractor.swift in Sources */,
+				4237DD2227AC93790011DD94 /* MovieConfigurator.swift in Sources */,
+				4237DD3027AC94660011DD94 /* TvSerialInteractor.swift in Sources */,
+				4237DD3227AC966A0011DD94 /* TvSerialConfigurator.swift in Sources */,
 				421033FE279E8C4D00F9268D /* APIRequest.swift in Sources */,
 				42116D36273A8F6D00926968 /* MoviesInteractor.swift in Sources */,
 				4267E69927A5897A00EA369E /* ImageLoadService.swift in Sources */,
 				423C600D2794651600DC4C95 /* TabBarItem.swift in Sources */,
 				4267E69527A56F6D00EA369E /* TvPopularCell.swift in Sources */,
 				423C5FF327918BA500DC4C95 /* FavoritesPresenter.swift in Sources */,
+				4237DD2F27AC94660011DD94 /* TvSerialViewController.swift in Sources */,
 				42116D38273A8FE500926968 /* MoviesConfigurator.swift in Sources */,
 				4227CC3327AA7568008A46FC /* NowPlaying.swift in Sources */,
 				423C60072791B6E700DC4C95 /* TrendsCell.swift in Sources */,
+				4237DD2027AC8F190011DD94 /* MovieInteractor.swift in Sources */,
 				42103400279F043D00F9268D /* HTTPMethod.swift in Sources */,
+				4237DD1B27AC8F190011DD94 /* MoviePresenter.swift in Sources */,
+				4237DD1D27AC8F190011DD94 /* MovieRouter.swift in Sources */,
 				423C60092792FDB100DC4C95 /* TrendsItemCell.swift in Sources */,
 				4267E69727A5779200EA369E /* TvPopular.swift in Sources */,
 				42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */,
@@ -450,11 +511,14 @@
 				423C5FFF27918BBF00DC4C95 /* SearchPresenter.swift in Sources */,
 				422CFF5E27A8151500124D00 /* FavoritesConfigurator.swift in Sources */,
 				42339F83279562120043B419 /* UITableView+SetEmpty.swift in Sources */,
+				4237DD1F27AC8F190011DD94 /* MovieViewController.swift in Sources */,
 				423E2DC827A179BA00540472 /* Trend.swift in Sources */,
 				4267E69327A56F4800EA369E /* TvPopularItemCell.swift in Sources */,
 				423C5FF727918BA500DC4C95 /* FavoritesViewController.swift in Sources */,
+				4237DD2D27AC94660011DD94 /* TvSerialRouter.swift in Sources */,
 				422CFF5727A7D34000124D00 /* SearchSettingsRouter.swift in Sources */,
 				4214030127A041F400BABF4F /* NetworkServiceProtocol.swift in Sources */,
+				4237DD2B27AC94660011DD94 /* TvSerialPresenter.swift in Sources */,
 				422CFF5A27A7D34000124D00 /* SearchSettingsInteractor.swift in Sources */,
 				42103402279F05D700F9268D /* ErrorResponse.swift in Sources */,
 				423C600427918BBF00DC4C95 /* SearchInteractor.swift in Sources */,
