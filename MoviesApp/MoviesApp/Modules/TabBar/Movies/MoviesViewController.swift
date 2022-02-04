@@ -14,10 +14,28 @@ import UIKit
 
 /// Протокол отображения MoviesViewController-а
 protocol MoviesDisplayLogic: AnyObject {
+    /// Загрузка данных
+    /// - Parameters:
+    ///   - trends: Тренды
+    ///   - tvPopulars: Популярные сериалы
+    ///   - nowPlayings: Сейчас в кино
     func loadDataDone(trends: [Trend], tvPopulars: [TvPopular], nowPlayings: [NowPlaying])
+    
+    /// Тренды
+    var trends: [Trend] { get set }
+    /// Сейчас в кино
+    var nowPlaying: [NowPlaying] { get set }
+    /// Популярные сериалы
+    var tvPopulars: [TvPopular] { get set }
     
     /// Обновить ячейки
     func reloadRows()
+    /// Обновить тренды
+    func reloadTrends()
+    /// Обновить сейчас в кино
+    func reloadNowPlaying()
+    /// Обновить популярные сериалы
+    func reloadTvPopular()
 }
 
 /// Главный экран, отображение фильмов
@@ -27,7 +45,7 @@ final class MoviesViewController: UIViewController {
     private let titleVC = "Киносмотр 🍿"
     
     // MARK: - ViewModels
-    var trends = [Trend]()
+    var trends = [Trend]() 
     var tvPopulars = [TvPopular]()
     var nowPlaying = [NowPlaying]()
     
@@ -52,19 +70,13 @@ final class MoviesViewController: UIViewController {
     
     private var service: NetworkServiceProtocol = APIRequest.shared
     
-    
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupConstrains()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         presenter?.loadData()
     }
-    
 }
 
 // MARK: Setup
@@ -103,17 +115,19 @@ extension MoviesViewController: UITableViewDataSource {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TrendsCell.self), for: indexPath) as? TrendsCell else { fatalError() }
             cell.trends = self.trends
+            cell.loadMoreDelegate = self
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: NowPlayingCell.self), for: indexPath
             ) as? NowPlayingCell else { fatalError() }
             cell.nowPlaying = self.nowPlaying
+            cell.loadMoreDelegate = self
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TvPopularCell.self), for: indexPath) as? TvPopularCell else { fatalError() }
-            
             cell.tvPopulars = self.tvPopulars
+            cell.loadMoreDelegate = self
             return cell
         default:
             fatalError()
@@ -135,6 +149,7 @@ extension MoviesViewController: UITableViewDelegate {
             // сейчас в кино
         case 1:
             return 200
+            // популярно на тв
         case 2:
             return 180
         default:
@@ -155,8 +170,42 @@ extension MoviesViewController: MoviesDisplayLogic {
         let trendsIndexPath = IndexPath(row: 0, section: 0)
         let nowPlayingPath = IndexPath(row: 1, section: 0)
         let tvPopularIndexPath = IndexPath(row: 2, section: 0)
+        
         tableView.reloadRows(at: [trendsIndexPath], with: .left)
         tableView.reloadRows(at: [nowPlayingPath], with: .right)
         tableView.reloadRows(at: [tvPopularIndexPath], with: .left)
     }
+    
+    func reloadTrends() {
+        let trendsIndexPath = IndexPath(row: 0, section: 0)
+        guard let trendsCell = tableView.cellForRow(at: trendsIndexPath) as? TrendsCell else { return }
+        trendsCell.trends = self.trends
+    }
+    
+    func reloadNowPlaying() {
+        let nowPlayingIndexPath = IndexPath(row: 1, section: 0)
+        guard let nowPlayingCell = tableView.cellForRow(at: nowPlayingIndexPath) as? NowPlayingCell else { return }
+        nowPlayingCell.nowPlaying = self.nowPlaying
+    }
+    
+    func reloadTvPopular() {
+        let tvPopularIndexPath = IndexPath(row: 2, section: 0)
+        guard let tvPopularCell = tableView.cellForRow(at: tvPopularIndexPath) as? TvPopularCell else { return }
+        tvPopularCell.tvPopulars = self.tvPopulars
+    }
 }
+
+// MARK: - LoadMoreDelegate
+extension MoviesViewController: LoadMoreDelegate {
+    func loadMore(cellType: CellType) {
+        switch cellType {
+        case .trend:
+            presenter?.loadMoreTrends()
+        case .nowPlaying:
+            presenter?.loadMoreNowPlaying()
+        case .tvPopular:
+            presenter?.loadMoreTvPopular()
+        }
+    }
+}
+
