@@ -11,6 +11,6 @@
 
 ✅ Dependency Injection
 
-Stack:
-*URLSession
-*UserDefaults
+### Stack:
+* URLSession
+* UserDefaults
