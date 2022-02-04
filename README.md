@@ -12,5 +12,5 @@
 ✅ Dependency Injection
 
 Stack:
-⋅⋅*URLSession
-⋅⋅*UserDefaults
+*URLSession
+*UserDefaults
