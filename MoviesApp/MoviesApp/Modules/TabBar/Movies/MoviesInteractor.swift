@@ -15,6 +15,13 @@ import UIKit
 protocol MoviesBusinessLogic {
     /// Получаем данные
     func retrieveData()
+    
+    /// Подгружаем страницы трендов
+    func retrieveMoreTrends()
+    /// Подгружаем страницы сейчас в кино
+    func retrieveMoreNowPlaying()
+    /// Подгружаем страницы популярных сериалов
+    func retrieveMoreTvPopular()
 }
 
 final class MoviesInteractor {
@@ -22,12 +29,14 @@ final class MoviesInteractor {
     
     private var service: NetworkServiceProtocol = APIRequest.shared
     
+    private var nowPlayingPage: Int = 1
+    private var nowPlayingTotalPages: Int = 1
+    
     private var trendsPage: Int = 1
     private var trendsTotalPages: Int = 1
     
-    private var nowPlayingPage: Int = 1
-    
-    private var tvPopularsPage: Int = 1
+    private var tvPopularPage: Int = 1
+    private var tvPopularTotalPages: Int = 1
 }
 
 // MARK: - MoviesBusinessLogic
@@ -38,29 +47,42 @@ extension MoviesInteractor: MoviesBusinessLogic {
         var nowPlaying = [NowPlaying]()
         var tvPopulars = [TvPopular]()
         
+        var trendsTotalPages = 0
+        var nowPlayingTotalPages = 0
+        var tvPopularTotalPages = 0
+        
         let dispatchGroup = DispatchGroup()
         
+        dispatchGroup.enter()
         service.getTrending(page: trendsPage) { trendsResponse in
+            defer { dispatchGroup.leave() }
             switch trendsResponse {
             case .success(let data):
+                trendsTotalPages = data.totalPages
                 trends = data.results
             case .failure(let error):
                 self.presenter?.showErrorMessage(text: error.message)
             }
         }
         
+        dispatchGroup.enter()
         service.getNowPlaying(page: nowPlayingPage) { nowPlayingResponse in
+            defer { dispatchGroup.leave() }
             switch nowPlayingResponse {
             case .success(let data):
+                nowPlayingTotalPages = data.totalPages
                 nowPlaying = data.results
             case .failure(let error):
                 self.presenter?.showErrorMessage(text: error.message)
             }
         }
         
-        service.getTvPopular(page: tvPopularsPage) { tvPopularsResponse in
+        dispatchGroup.enter()
+        service.getTvPopular(page: tvPopularPage) { tvPopularsResponse in
+            defer { dispatchGroup.leave() }
             switch tvPopularsResponse {
             case .success(let data):
+                tvPopularTotalPages = data.totalPages
                 tvPopulars = data.results
             case .failure(let error):
                 self.presenter?.showErrorMessage(text: error.message)
@@ -68,7 +90,56 @@ extension MoviesInteractor: MoviesBusinessLogic {
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.presenter?.loadDataSuccess(trends: trends, tvPopulars: tvPopulars, nowPlayings: nowPlaying)
+            guard let self = self else { return }
+            self.nowPlayingTotalPages = nowPlayingTotalPages
+            self.trendsTotalPages = trendsTotalPages
+            self.tvPopularTotalPages = tvPopularTotalPages
+            self.presenter?.loadDataSuccess(trends: trends, tvPopulars: tvPopulars, nowPlayings: nowPlaying)
+        }
+    }
+    
+    func retrieveMoreTrends() {
+        guard trendsPage <= trendsTotalPages else { return }
+        trendsPage += 1
+        
+        service.getTrending(page: trendsPage) { [weak self] getTrendingResponse in
+            switch getTrendingResponse {
+                
+            case .success(let data):
+                self?.presenter?.loadMoreTrendsSuccess(trends: data.results)
+                //print(data.results)
+            case .failure(let error):
+                self?.presenter?.showErrorMessage(text: error.message)
+            }
+        }
+    }
+    
+    func retrieveMoreNowPlaying() {
+        guard nowPlayingPage <= nowPlayingTotalPages else { return }
+        nowPlayingPage += 1
+        
+        service.getNowPlaying(page: nowPlayingPage) { [weak self] nowPlayingResponse in
+            switch nowPlayingResponse {
+            case .success(let data):
+                print(data.results)
+                self?.presenter?.loadMoreNowPlayingSuccess(nowPlaying: data.results)
+            case .failure(let error):
+                self?.presenter?.showErrorMessage(text: error.message)
+            }
+        }
+    }
+    
+    func retrieveMoreTvPopular() {
+        guard tvPopularPage <= tvPopularTotalPages else { return }
+        tvPopularPage += 1
+        
+        service.getTvPopular(page: tvPopularPage) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.presenter?.loadMoreTvPopularSuccess(tvPopular: data.results)
+            case .failure(let error):
+                self?.presenter?.showErrorMessage(text: error.message)
+            }
         }
     }
 }

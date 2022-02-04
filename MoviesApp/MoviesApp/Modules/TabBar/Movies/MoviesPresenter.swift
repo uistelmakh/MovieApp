@@ -18,13 +18,39 @@ protocol MoviesPresentationLogic {
     /// - Parameter text: Текст ошибки
     func showErrorMessage(text: String)
     
+    /// Данные успешно загружены
+    /// - Parameters:
+    ///   - trends: тренды
+    ///   - tvPopulars: популярные сериалы
+    ///   - nowPlayings: сейчас в кино
     func loadDataSuccess(trends: [Trend], tvPopulars: [TvPopular], nowPlayings: [NowPlaying])
+    
+    /// Успешная подгрузка доп страницы трендов
+    /// - Parameter trends: тренды
+    func loadMoreTrendsSuccess(trends: [Trend])
+    
+    /// Успешная подгрузка доп страницы трендов в кино
+    /// - Parameter nowPlaying: сейчас в кино
+    func loadMoreNowPlayingSuccess(nowPlaying: [NowPlaying])
+    
+    /// Успешная подгрузка доп страницы популярных сериалов на тв
+    /// - Parameter tvPopular: сериал
+    func loadMoreTvPopularSuccess(tvPopular: [TvPopular])
 }
 
 /// Протокол для работы MoviesPresenter из MoviesViewController
 protocol MoviesViewControllerOutput {
     /// Загрузка данных
     func loadData()
+    
+    /// Подгрузка доп страницы трендов
+    func loadMoreTrends()
+    
+    /// Подгрузка доп страницы трендов в кино
+    func loadMoreNowPlaying()
+    
+    /// Подгрузка доп страницы популярных сериалов на тв
+    func loadMoreTvPopular()
 }
 
 /// Презентер VIPER-модуля Фильмов
@@ -47,11 +73,45 @@ extension MoviesPresenter: MoviesPresentationLogic {
     func showErrorMessage(text: String) {
         
     }
+    
+    func loadMoreTrendsSuccess(trends: [Trend]) {
+        viewController?.trends.append(contentsOf: trends)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.reloadTrends()
+        }
+    }
+    
+    func loadMoreNowPlayingSuccess(nowPlaying: [NowPlaying]) {
+        print(nowPlaying)
+        viewController?.nowPlaying.append(contentsOf: nowPlaying)
+        DispatchQueue.main.async {
+            self.viewController?.reloadNowPlaying()
+        }
+    }
+    
+    func loadMoreTvPopularSuccess(tvPopular: [TvPopular]) {
+        viewController?.tvPopulars.append(contentsOf: tvPopular)
+        DispatchQueue.main.async {
+            self.viewController?.reloadTvPopular()
+        }
+    }
 }
 
 // MARK: - MoviesViewControllerOutput
 extension MoviesPresenter: MoviesViewControllerOutput {
     func loadData() {
         interactor?.retrieveData()
+    }
+    
+    func loadMoreNowPlaying() {
+        interactor?.retrieveMoreNowPlaying()
+    }
+    
+    func loadMoreTrends() {
+        interactor?.retrieveMoreTrends()
+    }
+    
+    func loadMoreTvPopular() {
+        interactor?.retrieveMoreTvPopular()
     }
 }

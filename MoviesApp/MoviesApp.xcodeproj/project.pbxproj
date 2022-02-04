@@ -59,6 +59,7 @@
 		4267E69927A5897A00EA369E /* ImageLoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267E69827A5897A00EA369E /* ImageLoadService.swift */; };
 		4267E69C27A5942700EA369E /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267E69B27A5942700EA369E /* ImageCacheService.swift */; };
 		4284003F273FFDDD007BEF11 /* RoutingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */; };
+		428F478127AD67AA000EC086 /* LoadMoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428F478027AD67AA000EC086 /* LoadMoreDelegate.swift */; };
 		42A7D48F27A6D49900A450A1 /* GlobalConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A7D48E27A6D49800A450A1 /* GlobalConsts.swift */; };
 		42E411E0273A742800429FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E411DF273A742800429FE2 /* AppDelegate.swift */; };
 		42E411E9273A742C00429FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E411E8273A742C00429FE2 /* Assets.xcassets */; };
@@ -118,6 +119,7 @@
 		4267E69827A5897A00EA369E /* ImageLoadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadService.swift; sourceTree = "<group>"; };
 		4267E69B27A5942700EA369E /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingAssistant.swift; sourceTree = "<group>"; };
+		428F478027AD67AA000EC086 /* LoadMoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreDelegate.swift; sourceTree = "<group>"; };
 		42A7D48E27A6D49800A450A1 /* GlobalConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConsts.swift; sourceTree = "<group>"; };
 		42E411DC273A742800429FE2 /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E411DF273A742800429FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				4262408E27424DB30034CDC5 /* BaseConfiguratorProtocol.swift */,
 				4284003E273FFDDD007BEF11 /* RoutingAssistant.swift */,
 				42A7D48E27A6D49800A450A1 /* GlobalConsts.swift */,
+				428F478027AD67AA000EC086 /* LoadMoreDelegate.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				423C600327918BBF00DC4C95 /* SearchViewController.swift in Sources */,
 				422CFF5927A7D34000124D00 /* SearchSettingsViewController.swift in Sources */,
 				423C5FFF27918BBF00DC4C95 /* SearchPresenter.swift in Sources */,
+				428F478127AD67AA000EC086 /* LoadMoreDelegate.swift in Sources */,
 				422CFF5E27A8151500124D00 /* FavoritesConfigurator.swift in Sources */,
 				42339F83279562120043B419 /* UITableView+SetEmpty.swift in Sources */,
 				4237DD1F27AC8F190011DD94 /* MovieViewController.swift in Sources */,

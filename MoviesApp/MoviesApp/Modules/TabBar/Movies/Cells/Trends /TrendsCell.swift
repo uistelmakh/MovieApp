@@ -9,6 +9,9 @@ import UIKit
 
 /// Ячейка для отображения фильмов в тренде
 final class TrendsCell: UITableViewCell {
+    /// делегат для подрузки новых страниц
+    weak var loadMoreDelegate: LoadMoreDelegate?
+    
     /// массив с трендовыми фильмами
     var trends = [Trend]() {
         didSet {
@@ -100,6 +103,11 @@ extension TrendsCell: UICollectionViewDataSource {
         cell.configure(with: trend)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard indexPath.row == trends.count - 2 else { return }
+        loadMoreDelegate?.loadMore(cellType: .trend)
     }
 }
 

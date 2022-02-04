@@ -9,6 +9,9 @@ import UIKit
 
 /// Ячейка для отображения фильмов в кино
 final class NowPlayingCell: UITableViewCell {
+    /// делегат для подругзки новых страниц
+    weak var loadMoreDelegate: LoadMoreDelegate?
+    
     /// массив с фильмами в кино
     var nowPlaying = [NowPlaying]() {
         didSet {
@@ -96,6 +99,11 @@ extension NowPlayingCell: UICollectionViewDataSource {
         cell.configure(with: nowPlaying)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard indexPath.row == nowPlaying.count - 3 else { return }
+        loadMoreDelegate?.loadMore(cellType: .nowPlaying)
     }
 }
 

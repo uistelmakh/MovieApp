@@ -9,6 +9,9 @@ import UIKit
 
 /// Ячейка для отображения популярных сериалов на тв
 final class TvPopularCell: UITableViewCell {
+    /// делегат для подрузки новых страниц
+    weak var loadMoreDelegate: LoadMoreDelegate?
+    
     /// массив с популярными сериалами на тв
     var tvPopulars = [TvPopular]() {
         didSet {
@@ -98,6 +101,11 @@ extension TvPopularCell: UICollectionViewDataSource {
         cell.configure(with: tvPopular)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard indexPath.row == tvPopulars.count - 3 else { return }
+        loadMoreDelegate?.loadMore(cellType: .tvPopular)
     }
 }
 
