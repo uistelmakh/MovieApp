@@ -13,24 +13,17 @@ final class TvPopularItemCell: UICollectionViewCell {
     private let imageNetworkService: ImageLoadServiceProtocol = ImageLoadService.shared
     
     // MARK: - UI
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let titleLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        $0.textColor = .black
+        $0.numberOfLines = 0
+    }
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
+    private let imageView: UIImageView = setupAutolayoutView {
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
+        $0.contentMode = .scaleAspectFill
+    }
     
     func configure(with tvPopular: TvPopular) {
         titleLabel.text = tvPopular.name

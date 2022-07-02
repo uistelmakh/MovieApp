@@ -20,14 +20,10 @@ final class TvPopularCell: UITableViewCell {
     }
     
     // MARK: - UI
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: .black)
-        label.text = "Популярно на ТВ"
-        return label
-    }()
+    private let titleLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 24, weight: .black)
+        $0.text = "Популярно на ТВ"
+    }
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -69,7 +65,6 @@ private extension TvPopularCell {
 // MARK: - Setup Constraints
 private extension TvPopularCell {
     func setupConstraints() {
-        
         // titleLabel
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -110,9 +105,7 @@ extension TvPopularCell: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
-extension TvPopularCell: UICollectionViewDelegate {
-    
-}
+extension TvPopularCell: UICollectionViewDelegate {}
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension TvPopularCell: UICollectionViewDelegateFlowLayout {

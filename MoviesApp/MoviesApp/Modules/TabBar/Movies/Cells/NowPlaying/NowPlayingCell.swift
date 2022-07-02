@@ -21,7 +21,6 @@ final class NowPlayingCell: UITableViewCell {
     
     // MARK: - UI
     private let titleLabel: UILabel = setupAutolayoutView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 24, weight: .black)
         $0.text = "Сейчас в кино"
     }
@@ -71,11 +70,9 @@ private extension NowPlayingCell {
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 24)
-        ])
+            titleLabel.heightAnchor.constraint(equalToConstant: 24),
         
         // collectionView
-        NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),

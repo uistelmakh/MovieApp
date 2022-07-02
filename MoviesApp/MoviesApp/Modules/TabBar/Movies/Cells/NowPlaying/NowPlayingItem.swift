@@ -12,15 +12,11 @@ final class NowPlayingItem: UICollectionViewCell {
     private let imageNetworkService: ImageLoadServiceProtocol = ImageLoadService.shared
     
     // MARK: - UI
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
+    private let imageView: UIImageView = setupAutolayoutView {
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
+        $0.contentMode = .scaleAspectFill
+    }
     
     func configure(with nowPlaying: NowPlaying) {
         let imageUrlString = GlobalConsts.Network.imageURL + nowPlaying.posterPath

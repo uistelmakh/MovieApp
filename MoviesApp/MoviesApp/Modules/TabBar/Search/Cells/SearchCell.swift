@@ -11,44 +11,32 @@ final class SearchCell: UITableViewCell {
     
     private let imageNetworkService: ImageLoadServiceProtocol = ImageLoadService.shared
     
-    private let searchImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let searchImageView: UIImageView = setupAutolayoutView {
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
+        $0.contentMode = .scaleAspectFill
+    }
     
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 2
-        return stackView
-    }()
+    private let stackView: UIStackView = setupAutolayoutView {
+        $0.axis = .vertical
+        $0.alignment = .leading
+        $0.distribution = .fillProportionally
+        $0.spacing = 2
+    }
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .black)
-        label.textColor =  .init(white: 0.4, alpha: 1)
-        label.numberOfLines = 2
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let titleLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .black)
+        $0.textColor =  .init(white: 0.4, alpha: 1)
+        $0.numberOfLines = 2
+        $0.textAlignment = .left
+    }
     
-    private let yearLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        label.textColor =  .init(white: 0.6, alpha: 1)
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let yearLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        $0.textColor =  .init(white: 0.6, alpha: 1)
+        $0.numberOfLines = 1
+        $0.textAlignment = .center
+    }
     
     func configure(with searchMovie: SearchMovie) {
         titleLabel.text = searchMovie.title
@@ -90,23 +78,21 @@ private extension SearchCell {
 private extension SearchCell {
     func setupConstraints() {
         addSubview(searchImageView)
+        addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(yearLabel)
+        
         NSLayoutConstraint.activate([
             searchImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             searchImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             searchImageView.heightAnchor.constraint(equalToConstant: 120),
             searchImageView.widthAnchor.constraint(equalToConstant: 80),
-            searchImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        ])
-        
-        addSubview(stackView)
-        NSLayoutConstraint.activate([
+            searchImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             stackView.leadingAnchor.constraint(equalTo: searchImageView.trailingAnchor, constant: 8),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
-        
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(yearLabel)
     }
 }

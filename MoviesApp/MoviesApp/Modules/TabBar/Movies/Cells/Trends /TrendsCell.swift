@@ -21,13 +21,10 @@ final class TrendsCell: UITableViewCell {
     
     // MARK: - UI
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: .black)
-        label.text = "Тренды этой недели"
-        return label
-    }()
+    private let titleLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 24, weight: .black)
+        $0.text = "Тренды этой недели"
+    }
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -70,18 +67,14 @@ private extension TrendsCell {
 // MARK: - Setup Constraints
 private extension TrendsCell {
     func setupConstraints() {
-        
         // titleLabel
-        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 24)
-        ])
+            titleLabel.heightAnchor.constraint(equalToConstant: 24),
         
         // collectionView
-        NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),

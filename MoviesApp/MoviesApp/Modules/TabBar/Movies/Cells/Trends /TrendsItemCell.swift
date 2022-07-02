@@ -12,51 +12,37 @@ final class TrendsItemCell: UICollectionViewCell {
     private let imageNetworkService: ImageLoadServiceProtocol = ImageLoadService.shared
     
     // MARK: - UI
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
-        label.textColor = .white
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let titleLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        $0.textColor = .white
+        $0.numberOfLines = 0
+    }
     
-    private let voteAverageLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        label.textColor = .white
-        label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.backgroundColor = .lightGray
-        label.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
-        label.layer.masksToBounds = true
-        
-        return label
-    }()
+    private let voteAverageLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        $0.textColor = .white
+        $0.numberOfLines = 1
+        $0.textAlignment = .center
+        $0.backgroundColor = .lightGray
+        $0.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
+        $0.layer.masksToBounds = true
+    }
     
-    private let mediaTypeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        label.textColor = .white
-        label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.backgroundColor = .lightGray
-        label.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
-        label.layer.masksToBounds = true
-        return label
-    }()
+    private let mediaTypeLabel: UILabel = setupAutolayoutView {
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        $0.textColor = .white
+        $0.numberOfLines = 1
+        $0.textAlignment = .center
+        $0.backgroundColor = .lightGray
+        $0.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
+        $0.layer.masksToBounds = true
+    }
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
+    private let imageView: UIImageView = setupAutolayoutView {
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = GlobalConsts.Sizes.cornerRadius
+        $0.contentMode = .scaleAspectFill
+    }
     
     func configure(with trend: Trend) {
         titleLabel.text = trend.name ?? trend.title
@@ -115,31 +101,24 @@ private extension TrendsItemCell {
 // MARK: - Setup Constraints
 private extension TrendsItemCell {
     func setupConstraints() {
-        
         // titleLabel
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        ])
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
         
         // voteAverageLabel
-        NSLayoutConstraint.activate([
             voteAverageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             voteAverageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            voteAverageLabel.widthAnchor.constraint(equalToConstant: 32)
-        ])
+            voteAverageLabel.widthAnchor.constraint(equalToConstant: 32),
         
         // mediaTypeLabel
-        NSLayoutConstraint.activate([
             mediaTypeLabel.leadingAnchor.constraint(equalTo: voteAverageLabel.trailingAnchor, constant: 6),
             mediaTypeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             mediaTypeLabel.widthAnchor.constraint(equalToConstant: 64),
-            mediaTypeLabel.heightAnchor.constraint(equalTo: voteAverageLabel.heightAnchor)
-        ])
+            mediaTypeLabel.heightAnchor.constraint(equalTo: voteAverageLabel.heightAnchor),
         
         // imageView
-        NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),

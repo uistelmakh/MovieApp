@@ -30,14 +30,11 @@ final class SearchViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     
     /// таблица для отображения коллекций
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-        tableView.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
-        return tableView
-    }()
+    private let tableView: UITableView = setupAutolayoutView {
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
+        $0.register(SearchCell.self, forCellReuseIdentifier: String(describing: SearchCell.self))
+    }
     
     // MARK: - ViewModels
     var searchResults = [SearchMovie]() {
@@ -138,9 +135,7 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension SearchViewController: UITableViewDelegate {
-    
-}
+extension SearchViewController: UITableViewDelegate {}
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
@@ -161,6 +156,4 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 // MARK: - SearchDisplayLogic
-extension SearchViewController: SearchDisplayLogic {
-    
-}
+extension SearchViewController: SearchDisplayLogic {}

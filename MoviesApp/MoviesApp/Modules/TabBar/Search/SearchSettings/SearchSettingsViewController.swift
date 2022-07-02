@@ -22,13 +22,10 @@ final class SearchSettingsViewController: UIViewController{
     /// Ссылка на слой презентации
     var presenter: SearchSettingsViewControllerOutput?
     
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.showsVerticalScrollIndicator = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        return tableView
-    }()
+    private let tableView: UITableView = setupAutolayoutView {
+        $0.showsVerticalScrollIndicator = false
+        $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
     
     private let adultSwitch = UISwitch()
     
