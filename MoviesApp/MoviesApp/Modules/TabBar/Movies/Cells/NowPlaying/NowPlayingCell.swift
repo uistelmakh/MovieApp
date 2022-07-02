@@ -20,13 +20,11 @@ final class NowPlayingCell: UITableViewCell {
     }
     
     // MARK: - UI
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: .black)
-        label.text = "Сейчас в кино"
-        return label
-    }()
+    private let titleLabel: UILabel = setupAutolayoutView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 24, weight: .black)
+        $0.text = "Сейчас в кино"
+    }
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

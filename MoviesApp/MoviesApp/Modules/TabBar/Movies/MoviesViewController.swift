@@ -52,16 +52,13 @@ final class MoviesViewController: UIViewController {
     // MARK: - UI
     
     /// таблица для отображения коллекций
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-        tableView.register(TrendsCell.self, forCellReuseIdentifier: String(describing: TrendsCell.self))
-        tableView.register(NowPlayingCell.self, forCellReuseIdentifier: String(describing: NowPlayingCell.self))
-        tableView.register(TvPopularCell.self, forCellReuseIdentifier: String(describing: TvPopularCell.self))
-        return tableView
-    }()
+    private let tableView: UITableView = setupAutolayoutView {
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
+        $0.register(TrendsCell.self, forCellReuseIdentifier: String(describing: TrendsCell.self))
+        $0.register(NowPlayingCell.self, forCellReuseIdentifier: String(describing: NowPlayingCell.self))
+        $0.register(TvPopularCell.self, forCellReuseIdentifier: String(describing: TvPopularCell.self))
+    }
     
     // MARK: - Params
     

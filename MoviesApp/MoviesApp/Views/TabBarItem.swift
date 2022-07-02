@@ -8,7 +8,6 @@
 import UIKit
 
 final class TabBarItem: UITabBarItem {
-
     override var title: String? {
         get { return nil }
         set { super.title = newValue }

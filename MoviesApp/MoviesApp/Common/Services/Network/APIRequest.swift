@@ -8,8 +8,7 @@
 import Foundation
 
 final class APIRequest {
-    
-    static let shared = APIRequest()
+    static var shared = APIRequest()
     
     private init(){}
     
@@ -40,7 +39,7 @@ final class APIRequest {
         case getTrending(Int)
         case getNowPlaying(Int)
         case getTvPopular(Int)
-        
+
         case searchMovie(String, Bool)
         
         /// url

@@ -15,7 +15,6 @@ import UIKit
 protocol MoviesBusinessLogic {
     /// Получаем данные
     func retrieveData()
-    
     /// Подгружаем страницы трендов
     func retrieveMoreTrends()
     /// Подгружаем страницы сейчас в кино
