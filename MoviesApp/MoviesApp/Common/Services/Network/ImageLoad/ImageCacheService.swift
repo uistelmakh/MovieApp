@@ -27,6 +27,6 @@ class ImageCacheService: ImageCacheServiceProtocol {
     }
     
     func setCashedImage(image: UIImage, url: String) {
-        self.imageCache.setObject(image, forKey: url as NSString)
+        imageCache.setObject(image, forKey: url as NSString)
     }
 }

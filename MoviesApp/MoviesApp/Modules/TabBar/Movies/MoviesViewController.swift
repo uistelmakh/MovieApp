@@ -111,7 +111,7 @@ extension MoviesViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TrendsCell.self), for: indexPath) as? TrendsCell else { fatalError() }
-            cell.trends = self.trends
+            cell.trends = trends
             cell.loadMoreDelegate = self
             return cell
         case 1:

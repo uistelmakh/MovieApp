@@ -19,6 +19,10 @@ protocol NetworkServiceProtocol {
     ///   - completion: Result<SearchMovieResponse, ErrorResponse>
     func getTrending(page: Int, completion: @escaping (GetTrendingResponse) -> Void)
     
+    /// Получение списка фильмов которые сейчас в кино
+    /// - Parameters:
+    ///   - page: Номер страницы
+    ///   - completion: Result<NowPlayingResponse, ErrorResponse>
     func getNowPlaying(page: Int, completion: @escaping (GetNowPlayingResponse) -> Void)
     
     ///  Получение списка популярных сериалов на тв

@@ -27,9 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController()
         routingAssistant.setRootNavigationController(navigationController)
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         
-        routingAssistant.constructStartViewController() { startViewController in
+        routingAssistant.constructStartViewController() { [weak self] startViewController in
+            guard let self = self else { return }
             if let startViewController = startViewController {
                 navigationController.viewControllers = [startViewController]
                 navigationController.isNavigationBarHidden = true
